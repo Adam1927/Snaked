@@ -9,5 +9,6 @@ module snaked.snaked {
     opens snaked to javafx.fxml;
     exports snaked;
     exports snaked.controller;
+    exports snaked.model;
     opens snaked.controller to javafx.fxml;
 }

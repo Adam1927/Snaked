@@ -1,0 +1,11 @@
+{
+  "startingPosX": 20,
+  "startingPosY": 20,
+  "initialSnakeLength": 3,
+  "gameBoardHeight": 41,
+  "gameBoardWidth": 41,
+  "startingDirection": "RIGHT",
+  "snakeSkin": "ONE",
+  "soundEffectsOn": "true",
+  "difficulty": "EASY"
+}
