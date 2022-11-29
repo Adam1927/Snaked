@@ -13,7 +13,7 @@ public enum SnakeSkin {
     @Getter private final Path bodyFileName;
     @Getter private final Path headFileName;
 
-    private SnakeSkin(Path headFileName, Path bodyFileName) {
+    SnakeSkin(Path headFileName, Path bodyFileName) {
         this.headFileName = headFileName;
         this.bodyFileName = bodyFileName;
     }
