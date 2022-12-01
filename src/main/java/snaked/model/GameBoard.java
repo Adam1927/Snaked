@@ -3,8 +3,7 @@ package snaked.model;
 import lombok.Getter;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GameBoard {
     private final BoardCell[][] cells;
@@ -49,5 +48,13 @@ public class GameBoard {
         snakeCoords.add(0, newHeadCoords);
     }
 
-
+    /**
+     * Spawns a new consumable on the game board
+     */
+    public void spawnConsumable(){
+        Random random = new Random();
+        int xRandom=random.nextInt(gameBoardWidth-1);
+        int yRandom=random.nextInt(gameBoardHeight-1);
+        consumableCoords.add(new Coordinate(xRandom, yRandom));
+    }
 }
