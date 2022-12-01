@@ -7,11 +7,11 @@ public enum Difficulty {
     MEDIUM(2, 2),
     HARD(4, 4);
     @Getter
-    private final double scoreMultiplier;
+    private final int scoreMultiplier;
     @Getter
-    private final double speedMultiplier;
+    private final int speedMultiplier;
 
-    Difficulty(double scoreMultiplier, double speedMultiplier) {
+    Difficulty(int scoreMultiplier, int speedMultiplier) {
         this.scoreMultiplier = scoreMultiplier;
         this.speedMultiplier = speedMultiplier;
     }

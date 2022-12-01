@@ -5,23 +5,31 @@ import lombok.Setter;
 
 public class GameControls {
     private Snake snake;
-    @Getter private int highscore=0;
+
     @Setter private Direction currentDirection;
     private GameBoard gameBoard;
 
-    public GameControls(Snake snake, GameBoard gameBoard, Direction startingDirection){
+    private GameOptions gameOptions;
+
+    public GameControls(Snake snake, GameBoard gameBoard, GameOptions gameOptions){
         this.snake = snake;
         this.gameBoard = gameBoard;
-        this.currentDirection = startingDirection;
+        this.currentDirection = gameOptions.getStartingDirection();
+        this.gameOptions = gameOptions;
     }
 
     public boolean checkAlive(){
-        return true; //TODO: complete this method
+        return true;
+        //TODO: complete this method
     }
 
     public boolean nextTurn(){
-        return true; //TODO:
+        gameBoard.updateSnakeCoordinates(currentDirection, false); // TODO: update ateConsumable
+        
+        return checkAlive();
     }
-
+    public int getScore (){
+        return snake.getEatenConsumables()*gameOptions.getDifficulty().getScoreMultiplier();
+    }
 
 }
