@@ -12,7 +12,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         System.out.println(
-                GameOptions.fromJSON("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\config\\initialSettings.json")// don't forget to change it later
+                GameOptions.fromJSON("src/main/resources/snaked/config/initialSettings.json")
         );
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
