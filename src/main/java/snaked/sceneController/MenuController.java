@@ -23,14 +23,8 @@ public class MenuController {
     private Button startButton = new Button();
 
 
-
     @FXML
     private Button scoreboardButton = new Button();
-
-    private Image cup = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\scoreboardButton.png");
-    private ImageView cupView = new ImageView(cup);
-
-
 
 
     // --Constructor
