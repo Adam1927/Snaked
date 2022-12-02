@@ -11,4 +11,5 @@ module snaked.snaked {
     exports snaked.controller;
     exports snaked.model;
     opens snaked.controller to javafx.fxml;
+    opens snaked.sceneController to javafx.fxml;
 }
