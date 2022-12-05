@@ -15,14 +15,14 @@
             <Label prefHeight="17.0" prefWidth="70.0" text="Sound" textAlignment="CENTER" />
             <Button fx:id="volumeButton" mnemonicParsing="false" onAction="#volumeButtonClick" prefHeight="40.0" prefWidth="40.0">
                <graphic>
-                  <ImageView fx:id="volumeIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="volumeIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/snaked/Icons/fullVolume.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Label prefHeight="17.0" prefWidth="129.0" text="Choose difficulty level" textAlignment="CENTER" />
+            <Label prefHeight="17.0" prefWidth="205.0" text="Choose difficulty level" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Easy" />
@@ -49,5 +49,14 @@
          </children>
       </VBox>
       <Label id="settingsHeader" alignment="CENTER" layoutX="1.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="448.0" text="Settings" textAlignment="CENTER" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" />
+      <Button fx:id="backButton" layoutX="1.0" layoutY="9.0" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="26.0" prefWidth="26.0">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/snaked/Icons/backArrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

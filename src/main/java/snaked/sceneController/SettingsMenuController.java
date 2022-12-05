@@ -11,6 +11,8 @@ public class SettingsMenuController {
     ImageView volumeIcon = new ImageView();
     @FXML
     Button volumeButton = new Button();
+    @FXML
+    Button backButton = new Button();
     Image muteVolume = new Image("snaked/Icons/muteVolume.png");
     Image fullVolume = new Image("snaked/Icons/fullVolume.png");
 
@@ -22,5 +24,9 @@ public class SettingsMenuController {
         else{
             volumeIcon.setImage((fullVolume));
         }
+    }
+    @FXML
+    protected void backButtonClick(ActionEvent event){
+
     }
 }

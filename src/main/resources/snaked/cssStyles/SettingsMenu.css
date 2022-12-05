@@ -23,5 +23,9 @@
     -fx-font-family: Sacramento;
     -fx-font-size: 36;
     -fx-alignment: center;
-
+}
+#backButton{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: transparent;
 }
