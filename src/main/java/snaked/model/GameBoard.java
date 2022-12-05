@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class GameBoard {
     private List<Coordinate> snakeCoords = new ArrayList<>();
@@ -40,45 +42,50 @@ public class GameBoard {
             case LEFT -> newHeadCoords = new Coordinate(headX - 1, headY);
         }
         snakeCoords.add(0, newHeadCoords);
-        if(newHeadCoords.equals(consumableCoords)) {
+        if (newHeadCoords.equals(consumableCoords)) {
             snake.increaseEatenConsumables();
-            spawnConsumable();}
-            else {
-                snakeCoords.remove(snakeCoords.size()-1);
+            spawnConsumable();
+        } else {
+            snakeCoords.remove(snakeCoords.size() - 1);
         }
     }
 
     /**
      * Spawns a new consumable on the game board
      */
-    private void spawnConsumable(){
+    private void spawnConsumable() {
         Random random = new Random();
-        int xRandom=random.nextInt(gameBoardWidth-1);
-        int yRandom=random.nextInt(gameBoardHeight-1);
+        int xRandom = random.nextInt(gameBoardWidth - 1);
+        int yRandom = random.nextInt(gameBoardHeight - 1);
         consumableCoords = new Coordinate(xRandom, yRandom);
     }
 
-    public boolean checkAlive(){
+    public boolean checkAlive() {
         Coordinate headCoords = snakeCoords.get(0);
-        if(headCoords.getX() >= gameBoardWidth || headCoords.getY() >= gameBoardHeight ||
-                headCoords.getX()< 0 || headCoords.getY()< 0){
+        // check if snake is outside the gameBoard
+        if (headCoords.getX() >= gameBoardWidth || headCoords.getY() >= gameBoardHeight ||
+                headCoords.getX() < 0 || headCoords.getY() < 0) {
             return false;
 
-        }else {
-            return true;
+
+        } else { // check if snake hits itself
+            List<Coordinate> bodyCoords = new ArrayList<>(snakeCoords);
+            bodyCoords.remove(0);
+            if (bodyCoords.contains(headCoords)) {
+                return false;
+            }
         }
-        if()
-
-
+        return true;
     }
 
-    public boolean nextTurn(){
+    public boolean nextTurn() {
         moveSnake(); // TODO: update ateConsumable
 
         return checkAlive();
     }
-    public int getScore (){
-        return snake.getEatenConsumables()*gameOptions.getDifficulty().getScoreMultiplier();
+
+    public int getScore() {
+        return snake.getEatenConsumables() * gameOptions.getDifficulty().getScoreMultiplier();
     }
 
 }
