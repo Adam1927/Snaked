@@ -8,19 +8,20 @@
 }
 .button{
     -fx-background-color: #000000;
-    -fx-font-family: Lucida Console;
+    -fx-font-family: Sacramento;
     -fx-text-fill: white;
     -fx-text-alignment: center;
     -fx-pref-height: 20px;
     -fx-pref-width: 62px;
 }
 .label{
-    -fx-font-family: Lucida Console;
+    -fx-font-family: Sacramento;
     -fx-alignment: center;
     -fx-font-size: 14;
 }
 #settingsHeader{
-    -fx-font-family: SignPainter;
+    -fx-font-family: Sacramento;
     -fx-font-size: 36;
     -fx-alignment: center;
+
 }
