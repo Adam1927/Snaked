@@ -10,6 +10,7 @@ public class GameBoard {
     private List<Coordinate> snakeCoords = new ArrayList<>();
     private Coordinate consumableCoords = null;
 
+
     private Snake snake;
     @Setter private Direction currentDirection;
     @Getter private final Path backgroundImage;
@@ -58,8 +59,17 @@ public class GameBoard {
     }
 
     public boolean checkAlive(){
-        return true;
-        // TODO: complete this method
+        Coordinate headCoords = snakeCoords.get(0);
+        if(headCoords.getX() >= gameBoardWidth || headCoords.getY() >= gameBoardHeight ||
+                headCoords.getX()< 0 || headCoords.getY()< 0){
+            return false;
+
+        }else {
+            return true;
+        }
+        if()
+
+
     }
 
     public boolean nextTurn(){

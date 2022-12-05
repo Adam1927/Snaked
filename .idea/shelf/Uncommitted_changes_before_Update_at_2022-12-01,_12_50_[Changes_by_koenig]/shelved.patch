@@ -1,0 +1,17 @@
+Index: src/main/java/snaked/model/GameControls.java
+===================================================================
+diff --git a/src/main/java/snaked/model/GameControls.java b/src/main/java/snaked/model/GameControls.java
+--- a/src/main/java/snaked/model/GameControls.java	
++++ b/src/main/java/snaked/model/GameControls.java	
+@@ -23,6 +23,11 @@
+         //TODO: complete this method
+     }
+ 
++    /**
++     * Update the board by one round
++     *
++     * @return boolean indicating whether the game is still continuing (true) or Game Over (false)
++     */
+     public boolean nextTurn(){
+         gameBoard.updateSnakeCoordinates(currentDirection, false); // TODO: update ateConsumable
+         
