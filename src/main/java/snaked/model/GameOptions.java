@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,8 +30,8 @@ public class GameOptions {
      * @return GameOptions object, containing all the properties read from the JSON file
      * @throws IOException if the path to the JSON file cannot be read
      */
-    public static GameOptions fromJSON(String filePath) throws IOException {
+    public static GameOptions fromJSON(InputStream file) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), GameOptions.class);
+        return objectMapper.readValue(file, GameOptions.class);
     }
 }

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import snaked.model.GameOptions;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class App extends Application {
 
@@ -31,9 +32,9 @@ public class App extends Application {
     Button settingsButton = new Button();
 
     @Override
-    public void start(Stage stage) throws IOException {
-        System.out.println(
-                GameOptions.fromJSON("src/main/resources/snaked/config/initialSettings.json")
+    public void start(Stage stage) throws IOException, URISyntaxException {
+        GameOptions.fromJSON(
+                App.class.getResourceAsStream("config/initialSettings.json")
         );
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
