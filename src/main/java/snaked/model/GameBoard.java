@@ -8,8 +8,7 @@ import java.util.*;
 
 public class GameBoard {
     private List<Coordinate> snakeCoords = new ArrayList<>();
-    private Set<Coordinate> consumableCoords = new HashSet<>();
-    private Set<Coordinate> wallCoords = new HashSet<>();
+    private Coordinate consumableCoords = null;
 
     private Snake snake;
     @Setter private Direction currentDirection;
@@ -27,13 +26,9 @@ public class GameBoard {
 
     /**
      * Updates the snake's coordinates
-     *
-     * @param ateConsumable If true, the snake grows by one cell
+     * if the snake eats a consumable then it grows
      */
-    private void moveSnake(boolean ateConsumable) {
-        if(ateConsumable)
-            snakeCoords.remove(snakeCoords.size() - 1); // remove tail
-
+    private void moveSnake() {
         int headX = snakeCoords.get(0).getX();
         int headY = snakeCoords.get(0).getY();
         Coordinate newHeadCoords = null;
@@ -44,6 +39,12 @@ public class GameBoard {
             case LEFT -> newHeadCoords = new Coordinate(headX - 1, headY);
         }
         snakeCoords.add(0, newHeadCoords);
+        if(newHeadCoords.equals(consumableCoords)) {
+            snake.increaseEatenConsumables();
+            spawnConsumable();}
+            else {
+                snakeCoords.remove(snakeCoords.size()-1);
+        }
     }
 
     /**
@@ -53,7 +54,7 @@ public class GameBoard {
         Random random = new Random();
         int xRandom=random.nextInt(gameBoardWidth-1);
         int yRandom=random.nextInt(gameBoardHeight-1);
-        consumableCoords.add(new Coordinate(xRandom, yRandom));
+        consumableCoords = new Coordinate(xRandom, yRandom);
     }
 
     public boolean checkAlive(){
@@ -62,7 +63,7 @@ public class GameBoard {
     }
 
     public boolean nextTurn(){
-        moveSnake(false); // TODO: update ateConsumable
+        moveSnake(); // TODO: update ateConsumable
 
         return checkAlive();
     }
