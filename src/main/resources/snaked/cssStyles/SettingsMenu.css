@@ -1,0 +1,26 @@
+#volumeButton {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: transparent;
+}
+#settingsWindow{
+    -fx-background-color: #9E9E9E;
+}
+.button{
+    -fx-background-color: #000000;
+    -fx-font-family: Lucida Console;
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 62px;
+}
+.label{
+    -fx-font-family: Lucida Console;
+    -fx-alignment: center;
+    -fx-font-size: 14;
+}
+#settingsHeader{
+    -fx-font-family: SignPainter;
+    -fx-font-size: 36;
+    -fx-alignment: center;
+}

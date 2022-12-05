@@ -20,7 +20,7 @@ public class App extends Application {
     private Scene scene;
 
 
-    Image snakeLogo = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\snakeLogo.png");
+    Image snakeLogo = new Image("snaked/Icons/snakeLogo.png");
 
     @FXML
     ImageView snakeLogoView = new ImageView(snakeLogo);
@@ -33,18 +33,18 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         System.out.println(
-                GameOptions.fromJSON("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\config\\initialSettings.json")
+                GameOptions.fromJSON("src/main/resources/snaked/config/initialSettings.json")
         );
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("Snake Game");
 
-        Image icon = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\snake.png"); // icon for the app
+        Image icon = new Image("snaked/Icons/snake.png"); // icon for the app
         stage.getIcons().add(icon); // setting the icon
 
 
-        snakeLogo = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\snakeLogo.png");
+        snakeLogo = new Image("snaked/Icons/snakeLogo.png");
         snakeLogoView = new ImageView(snakeLogo);
 
         stage.setResizable(false);
@@ -77,8 +77,9 @@ public class App extends Application {
 
     // -- Settings button functionality
     public void goToSettings(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/settings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/SettingsMenu.fxml"));
         scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("cssStyles/SettingsMenu.css").toExternalForm());
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
