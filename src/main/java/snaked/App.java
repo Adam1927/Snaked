@@ -32,14 +32,15 @@ public class App extends Application {
     Button settingsButton = new Button();
 
     @Override
-    public void start(Stage stage) throws IOException, URISyntaxException {
+    public void start(Stage stage) throws IOException {
         GameOptions.fromJSON(
-                App.class.getResourceAsStream("config/initialSettings.json")
-        );
+                App.class.getResourceAsStream("config/initialSettings.json"));
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        stage.setTitle("Snake Game");
+        stage.setTitle("Snaked");
 
         Image icon = new Image("snaked/Icons/snake.png"); // icon for the app
         stage.getIcons().add(icon); // setting the icon
