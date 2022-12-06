@@ -9,22 +9,20 @@ import java.util.List;
 import java.util.Random;
 
 public class GameBoard {
-    private List<Coordinate> snakeCoords = new ArrayList<>();
+    private final List<Coordinate> snakeCoords = new ArrayList<>();
     private Coordinate consumableCoords = null;
 
 
-    private Snake snake;
     @Setter private Direction currentDirection;
     @Getter private final Path backgroundImage;
     @Getter private final int gameBoardHeight;
     @Getter private final int gameBoardWidth;
-    @Getter private final GameOptions gameOptions;
 
-    public GameBoard(int gameBoardHeight, int gameBoardWidth, Path backgroundImage, GameOptions gameOptions) {
+    public GameBoard(int gameBoardHeight, int gameBoardWidth, Path backgroundImage) {
         this.gameBoardHeight = gameBoardHeight;
         this.gameBoardWidth = gameBoardWidth;
         this.backgroundImage = backgroundImage;
-        this.gameOptions = gameOptions;
+        spawnConsumable();
     }
 
     /**
@@ -43,7 +41,7 @@ public class GameBoard {
         }
         snakeCoords.add(0, newHeadCoords);
         if (newHeadCoords.equals(consumableCoords)) {
-            snake.increaseEatenConsumables();
+            GameState.getInstance().getSnake().increaseEatenConsumables();
             spawnConsumable();
         } else {
             snakeCoords.remove(snakeCoords.size() - 1);
@@ -54,13 +52,20 @@ public class GameBoard {
      * Spawns a new consumable on the game board
      */
     private void spawnConsumable() {
-        Random random = new Random();
+        Random random = GameState.getInstance().getRandomGen();
+
         int xRandom = random.nextInt(gameBoardWidth - 1);
         int yRandom = random.nextInt(gameBoardHeight - 1);
         consumableCoords = new Coordinate(xRandom, yRandom);
     }
 
-    public boolean checkAlive() {
+    /**
+     * Checks if the snake is alive or dead
+     * The snake is dead if it hit a wall or its own body
+     *
+     * @return true if the snake is alive, false if dead
+     */
+    private boolean checkAlive() {
         Coordinate headCoords = snakeCoords.get(0);
         // check if snake is outside the gameBoard
         if (headCoords.getX() >= gameBoardWidth || headCoords.getY() >= gameBoardHeight ||
@@ -78,14 +83,36 @@ public class GameBoard {
         return true;
     }
 
+    /**
+     * Execute the next turn
+     * This includes:
+     * - Moving the snake
+     * - Checking if it ate a consumable (if yes, growing its size)
+     * - Spawning a new consumable if the current one has been eaten
+     *
+     * @return true if the game continues, false if game over
+     */
     public boolean nextTurn() {
-        moveSnake(); // TODO: update ateConsumable
+        moveSnake();
 
         return checkAlive();
     }
 
+    /**
+     * Get the score of the current game
+     * The score is calculated using the current difficulty and the eaten consumables
+     *
+     * @return score of the current game
+     */
     public int getScore() {
-        return snake.getEatenConsumables() * gameOptions.getDifficulty().getScoreMultiplier();
+        Snake snake = GameState.getInstance().getSnake();
+        Difficulty difficulty = GameState.getInstance().getOptions().getDifficulty();
+        return snake.getEatenConsumables() * difficulty.getScoreMultiplier();
+    }
+
+    public BoardCell[][] getBoardAsArray() {
+        // TODO:
+        return null;
     }
 
 }

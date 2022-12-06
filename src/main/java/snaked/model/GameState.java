@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 /**
  * GameState Singleton
@@ -18,6 +19,8 @@ public class GameState {
     @Getter private final GameOptions options;
     @Getter @Setter private Snake snake;
     @Getter @Setter private GameBoard gameBoard;
+    // A single random number generator should be shared in whole application
+    @Getter private final Random randomGen = new Random();
 
     /**
      * Private constructor, so only one instance can be created (using the createInstance method)
