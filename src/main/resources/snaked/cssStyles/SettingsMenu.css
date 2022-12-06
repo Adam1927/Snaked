@@ -14,6 +14,15 @@
     -fx-pref-height: 20px;
     -fx-pref-width: 62px;
 }
+#easyButton{
+    -fx-background-color: #443c3c;
+}
+#map1Button{
+    -fx-background-color: #443c3c;
+}
+#snake1Button{
+    -fx-background-color: #443c3c;
+}
 .label{
     -fx-font-family: Sacramento;
     -fx-alignment: center;
