@@ -13,7 +13,7 @@
       <VBox alignment="CENTER" layoutX="147.0" layoutY="55.0" prefHeight="335.0" prefWidth="309.0" spacing="20.0">
          <children>
             <Label prefHeight="17.0" prefWidth="70.0" text="Sound" textAlignment="CENTER" />
-            <Button fx:id="volumeButton" mnemonicParsing="false" onAction="#volumeButtonClick" prefHeight="40.0" prefWidth="40.0">
+            <Button fx:id="volumeButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#volumeButtonClick" prefHeight="40.0" prefWidth="40.0">
                <graphic>
                   <ImageView fx:id="volumeIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
