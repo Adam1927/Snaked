@@ -31,6 +31,10 @@ public class App extends Application {
     Button scoreboardButton = new Button();
     @FXML
     Button settingsButton = new Button();
+
+    @FXML
+    Button startButton = new Button();
+
     public static Scene mainMenu;
 
     @Override
@@ -56,8 +60,7 @@ public class App extends Application {
 
         stage.setResizable(false);
 
-        Button scoreboardButton = new Button();
-
+        scene.getStylesheets().add(getClass().getResource("cssStyles/MainMenu.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();
