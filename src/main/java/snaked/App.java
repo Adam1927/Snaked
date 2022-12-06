@@ -29,6 +29,7 @@ public class App extends Application {
     Button scoreboardButton = new Button();
     @FXML
     Button settingsButton = new Button();
+    public static Scene mainMenu;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -54,6 +55,8 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        mainMenu = scene;
     }
     //methods
     public void startGame(ActionEvent event) throws IOException {
