@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import snaked.model.GameOptions;
+import snaked.model.GameState;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -33,8 +34,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        GameOptions.fromJSON(
-                App.class.getResourceAsStream("config/initialSettings.json"));
+        GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
+
+        System.out.println(
+                GameState.getInstance().getOptions().getDifficulty()
+        );
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
