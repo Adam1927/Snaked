@@ -31,6 +31,11 @@ public class App extends Application {
     @FXML
     Button settingsButton = new Button();
 
+    @FXML
+    Button startButton = new Button();
+
+    public static Scene mainMenu;
+
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
@@ -51,9 +56,12 @@ public class App extends Application {
         stage.setResizable(false);
 
         Button scoreboardButton = new Button();
+        scene.getStylesheets().add(getClass().getResource("cssStyles/MainMenu.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();
+
+        mainMenu = scene;
     }
 
     //methods
