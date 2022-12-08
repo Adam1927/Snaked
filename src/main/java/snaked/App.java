@@ -33,12 +33,14 @@ public class App extends Application {
     Button settingsButton = new Button();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
         GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
 
         System.out.println(
                 GameState.getInstance().getOptions().getDifficulty()
         );
+
+        GameState.getInstance().loadScores();
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
