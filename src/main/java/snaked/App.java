@@ -10,11 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import snaked.model.GameOptions;
 import snaked.model.GameState;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class App extends Application {
 
@@ -40,7 +38,13 @@ public class App extends Application {
                 GameState.getInstance().getOptions().getDifficulty()
         );
 
-        GameState.getInstance().loadScores();
+        GameState ins = GameState.getInstance();
+        ins.addScore(6);
+        ins.addScore(2);
+        ins.addScore(10);
+        ins.addScore(1);
+        ins.addScore(4);
+        System.out.println(ins.getNHighestScores(2));
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
@@ -63,33 +67,34 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     //methods
     public void startGame(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameBoard.fxml"));
         scene = new Scene(fxmlLoader.load());
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();
     }
 
     // -- Scoreboard button functionality
-    public void goToScoreboard(ActionEvent event) throws IOException{
+    public void goToScoreboard(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/scoreboard.fxml"));
         scene = new Scene(fxmlLoader.load());
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
     // -- Settings button functionality
-    public void goToSettings(ActionEvent event) throws IOException{
+    public void goToSettings(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/SettingsMenu.fxml"));
         scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("cssStyles/SettingsMenu.css").toExternalForm());
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 

@@ -74,16 +74,29 @@ public class GameState {
     /**
      * Load scores from file
      *
-     * @throws IOException If the file cannot be opened
+     * @throws IOException            If the file cannot be opened
      * @throws ClassNotFoundException If the file cannot be deserialized into an object
      */
     public void loadScores() throws IOException, ClassNotFoundException {
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SCORE_FILENAME));
-            scores = (List<Integer>) ois.readObject();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SCORE_FILENAME))) {
+            // Generic types cannot be type-checked ("instanceof")
+            // We know that we can expect a List<Integer>, so we are suppressing the warning
+            @SuppressWarnings("unchecked")
+            List<Integer> parsedScores = (List<Integer>) ois.readObject();
+            scores = parsedScores;
         } catch (FileNotFoundException fileNotFoundException) {
             scores = new ArrayList<>();
         }
+    }
+
+    /**
+     * Get the N highest scores
+     *
+     * @param n The number of highest scores to get
+     * @return the N highest scores
+     */
+    public List<Integer> getNHighestScores(int n) {
+        return scores.stream().sorted((i1, i2) -> i2 - i1).limit(n).toList();
     }
 
 
