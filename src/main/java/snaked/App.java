@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lombok.extern.java.Log;
 import snaked.model.GameState;
 
 import java.io.IOException;
@@ -31,9 +32,10 @@ public class App extends Application {
     Button settingsButton = new Button();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
         GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
-
+        //load the data
+        GameState.getInstance().loadScores();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -88,5 +90,13 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        //before the app closes we save the scores
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                GameState.getInstance().saveScores();
+            } catch (IOException e) {
+                GameState.getInstance().getLogger().warning("Could not save scores");
+            }
+        }));
     }
 }

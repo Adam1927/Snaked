@@ -3,11 +3,13 @@ package snaked.model;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
+import snaked.App;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * GameState Singleton
@@ -23,6 +25,7 @@ public class GameState {
     @Getter @Setter private GameBoard gameBoard;
     // A single random number generator should be shared in whole application
     @Getter private final Random randomGen = new Random();
+    @Getter private final Logger logger = Logger.getLogger(App.class.getName());
     private List<Integer> scores = new ArrayList<>();
 
     /**
