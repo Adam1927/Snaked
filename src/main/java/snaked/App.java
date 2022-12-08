@@ -31,21 +31,8 @@ public class App extends Application {
     Button settingsButton = new Button();
 
     @Override
-    public void start(Stage stage) throws IOException, ClassNotFoundException {
+    public void start(Stage stage) throws IOException {
         GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
-
-        System.out.println(
-                GameState.getInstance().getOptions().getDifficulty()
-        );
-
-        GameState ins = GameState.getInstance();
-        ins.addScore(6);
-        ins.addScore(2);
-        ins.addScore(10);
-        ins.addScore(1);
-        ins.addScore(4);
-        System.out.println(ins.getNHighestScores(2));
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -62,7 +49,6 @@ public class App extends Application {
         stage.setResizable(false);
 
         Button scoreboardButton = new Button();
-
 
         stage.setScene(scene);
         stage.show();

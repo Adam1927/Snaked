@@ -58,6 +58,7 @@ public class GameState {
     public void addScore(int score) {
         if (score <= 0)
             throw new IllegalArgumentException("The score must be bigger than 0");
+
         scores.add(score);
     }
 
@@ -67,8 +68,9 @@ public class GameState {
      * @throws IOException When the file cannot be written to
      */
     public void saveScores() throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SCORE_FILENAME));
-        oos.writeObject(scores);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SCORE_FILENAME))) {
+            oos.writeObject(scores);
+        }
     }
 
     /**
