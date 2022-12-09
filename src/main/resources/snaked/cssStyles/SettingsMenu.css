@@ -6,23 +6,25 @@
 #settingsWindow{
     -fx-background-color: #9E9E9E;
 }
+
 .button{
-    -fx-background-color: #000000;
+    -fx-background-radius: 20px;
+    -fx-background-color: transparent;
     -fx-font-family: Sacramento;
     -fx-text-fill: white;
     -fx-text-alignment: center;
     -fx-pref-height: 20px;
-    -fx-pref-width: 62px;
+    -fx-pref-width: 68px;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
 }
-#easyButton{
-    -fx-background-color: #443c3c;
+.button:hover{
+    -fx-background-color: #111111;
 }
-#map1Button{
-    -fx-background-color: #443c3c;
-}
-#snake1Button{
-    -fx-background-color: #443c3c;
-}
+
+
+
 .label{
     -fx-font-family: Sacramento;
     -fx-alignment: center;

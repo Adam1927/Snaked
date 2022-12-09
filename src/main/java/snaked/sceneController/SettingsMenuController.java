@@ -35,6 +35,7 @@ public class SettingsMenuController {
     Image muteVolume = new Image("snaked/Icons/muteVolume.png");
     Image fullVolume = new Image("snaked/Icons/fullVolume.png");
 
+
     @FXML //button for toggling sound & changes buttons icon on click.
     protected void volumeButtonClick() {
         if(volumeIcon.getImage() == fullVolume){
@@ -55,58 +56,60 @@ public class SettingsMenuController {
 
     @FXML //changes color of buttons to indicate what options have been chosen.
     protected void easyButtonClick(){
-        easyButton.setStyle("-fx-background-color: #443c3c");
-        mediumButton.setStyle("-fx-background-color: #000000");
-        hardButton.setStyle("-fx-background-color: #000000");
+        easyButton.setStyle("-fx-background-color: #111111");
+        mediumButton.setStyle(null);
+        hardButton.setStyle(null);
     }
     @FXML
     protected void mediumButtonClick(){
-        easyButton.setStyle("-fx-background-color: #000000");
-        mediumButton.setStyle("-fx-background-color: #443c3c");
-        hardButton.setStyle("-fx-background-color: #000000");
+        easyButton.setStyle(null);
+        mediumButton.setStyle("-fx-background-color: #111111");
+        hardButton.setStyle(null);
     }
     @FXML
     protected void hardButtonClick(){
-        easyButton.setStyle("-fx-background-color: #000000");
-        mediumButton.setStyle("-fx-background-color: #000000");
-        hardButton.setStyle("-fx-background-color: #443c3c");
+        easyButton.setStyle(null);
+        mediumButton.setStyle(null);
+        hardButton.setStyle("-fx-background-color: #111111");
     }
     @FXML
     protected void map1ButtonClick(){
-        map1Button.setStyle("-fx-background-color: #443c3c");
-        map2Button.setStyle("-fx-background-color: #000000");
-        map3Button.setStyle("-fx-background-color: #000000");
+        map1Button.setStyle("-fx-background-color: #111111");
+        map2Button.setStyle(null);
+        map3Button.setStyle(null);
     }
     @FXML
     protected void map2ButtonClick(){
-        map1Button.setStyle("-fx-background-color: #000000");
-        map2Button.setStyle("-fx-background-color: #443c3c");
-        map3Button.setStyle("-fx-background-color: #000000");
+        map1Button.setStyle(null);
+        map2Button.setStyle("-fx-background-color: #111111");
+        map3Button.setStyle(null);
     }
     @FXML
     protected void map3ButtonClick(){
-        map1Button.setStyle("-fx-background-color: #000000");
-        map2Button.setStyle("-fx-background-color: #000000");
-        map3Button.setStyle("-fx-background-color: #443c3c");
+        map1Button.setStyle(null);
+        map2Button.setStyle(null);
+        map3Button.setStyle("-fx-background-color: #111111");
     }
     @FXML
     protected void snake1ButtonClick(){
-        snake1Button.setStyle("-fx-background-color: #443c3c");
-        snake2Button.setStyle("-fx-background-color: #000000");
-        snake3Button.setStyle("-fx-background-color: #000000");
+        snake1Button.setStyle("-fx-background-color: #111111");
+        snake2Button.setStyle(null);
+        snake3Button.setStyle(null);
     }
     @FXML
     protected void snake2ButtonClick(){
-        snake1Button.setStyle("-fx-background-color: #000000");
-        snake2Button.setStyle("-fx-background-color: #443c3c");
-        snake3Button.setStyle("-fx-background-color: #000000");
+        snake1Button.setStyle(null);
+        snake2Button.setStyle("-fx-background-color: #111111");
+        snake3Button.setStyle(null);
     }
     @FXML
     protected void snake3ButtonClick(){
-        snake1Button.setStyle("-fx-background-color: #000000");
-        snake2Button.setStyle("-fx-background-color: #000000");
-        snake3Button.setStyle("-fx-background-color: #443c3c");
+        snake1Button.setStyle(null);
+        snake2Button.setStyle(null);
+        snake3Button.setStyle("-fx-background-color: #111111");
     }
+
+
 
 
 }
