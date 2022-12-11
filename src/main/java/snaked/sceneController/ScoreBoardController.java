@@ -16,6 +16,7 @@ public class ScoreBoardController {
         stage.setScene(App.mainMenu);
     }
 
+    @FXML //To display top 5 highest scores
     private void showHighScores(){
 
     }
