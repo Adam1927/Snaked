@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import snaked.App;
 
 public class SettingsMenuController {
+    public static final String SELECTED_STYLE = "-fx-background-color: #111111;-fx-text-fill: #fff;";
     @FXML
     ImageView volumeIcon = new ImageView();
     @FXML
@@ -56,57 +57,57 @@ public class SettingsMenuController {
 
     @FXML //changes color of buttons to indicate what options have been chosen.
     protected void easyButtonClick(){
-        easyButton.setStyle("-fx-background-color: #111111");
+        easyButton.setStyle(SELECTED_STYLE);
         mediumButton.setStyle(null);
         hardButton.setStyle(null);
     }
     @FXML
     protected void mediumButtonClick(){
         easyButton.setStyle(null);
-        mediumButton.setStyle("-fx-background-color: #111111");
+        mediumButton.setStyle(SELECTED_STYLE);
         hardButton.setStyle(null);
     }
     @FXML
     protected void hardButtonClick(){
         easyButton.setStyle(null);
         mediumButton.setStyle(null);
-        hardButton.setStyle("-fx-background-color: #111111");
+        hardButton.setStyle(SELECTED_STYLE);
     }
     @FXML
     protected void map1ButtonClick(){
-        map1Button.setStyle("-fx-background-color: #111111");
+        map1Button.setStyle(SELECTED_STYLE);
         map2Button.setStyle(null);
         map3Button.setStyle(null);
     }
     @FXML
     protected void map2ButtonClick(){
         map1Button.setStyle(null);
-        map2Button.setStyle("-fx-background-color: #111111");
+        map2Button.setStyle(SELECTED_STYLE);
         map3Button.setStyle(null);
     }
     @FXML
     protected void map3ButtonClick(){
         map1Button.setStyle(null);
         map2Button.setStyle(null);
-        map3Button.setStyle("-fx-background-color: #111111");
+        map3Button.setStyle(SELECTED_STYLE);
     }
     @FXML
     protected void snake1ButtonClick(){
-        snake1Button.setStyle("-fx-background-color: #111111");
+        snake1Button.setStyle(SELECTED_STYLE);
         snake2Button.setStyle(null);
         snake3Button.setStyle(null);
     }
     @FXML
     protected void snake2ButtonClick(){
         snake1Button.setStyle(null);
-        snake2Button.setStyle("-fx-background-color: #111111");
+        snake2Button.setStyle(SELECTED_STYLE);
         snake3Button.setStyle(null);
     }
     @FXML
     protected void snake3ButtonClick(){
         snake1Button.setStyle(null);
         snake2Button.setStyle(null);
-        snake3Button.setStyle("-fx-background-color: #111111");
+        snake3Button.setStyle(SELECTED_STYLE);
     }
 
 
