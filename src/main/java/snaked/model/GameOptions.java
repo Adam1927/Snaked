@@ -1,10 +1,6 @@
 package snaked.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +15,7 @@ public class GameOptions {
     private int gameBoardWidth;
     private Direction startingDirection;
     private SnakeSkin snakeSkin;
+    private MapSkin mapSkin;
     private boolean soundEffectsOn;
     private Difficulty difficulty;
 }

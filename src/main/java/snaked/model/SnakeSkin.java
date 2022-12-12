@@ -6,14 +6,17 @@ import java.nio.file.Path;
 
 public enum SnakeSkin {
     //TODO: as soon as we have the images for the snake skin, we can add them as arguments for the enums
-    ONE(null, null),
-    TWO(null, null),
-    THREE(null, null);
+    ONE(1, null, null),
+    TWO(2, null, null),
+    THREE(3, null, null);
+
+    @Getter private final int ordinalRepresentation;
 
     @Getter private final Path bodyFileName;
     @Getter private final Path headFileName;
 
-    SnakeSkin(Path headFileName, Path bodyFileName) {
+    SnakeSkin(int ordinalRepresentation, Path headFileName, Path bodyFileName) {
+        this.ordinalRepresentation = ordinalRepresentation;
         this.headFileName = headFileName;
         this.bodyFileName = bodyFileName;
     }

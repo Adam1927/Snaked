@@ -30,7 +30,7 @@
                   <Button fx:id="hardButton" mnemonicParsing="false" onAction="#hardButtonClick" text="Hard" />
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="96.0" text="Choose a map" textAlignment="CENTER" />
+            <Label prefHeight="17.0" prefWidth="96.0" text="Choose a mapSkin" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
                   <Button fx:id="map1Button" mnemonicParsing="false" onAction="#map1ButtonClick" text="Map 1" />

@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import snaked.App;
+import snaked.model.Difficulty;
+import snaked.model.GameState;
+import snaked.model.MapSkin;
+import snaked.model.SnakeSkin;
 
 public class SettingsMenuController {
     public static final String SELECTED_STYLE = "-fx-background-color: #111111;-fx-text-fill: #fff;";
@@ -36,6 +40,12 @@ public class SettingsMenuController {
     Image muteVolume = new Image("snaked/Icons/muteVolume.png");
     Image fullVolume = new Image("snaked/Icons/fullVolume.png");
 
+    @FXML
+    public void initialize() {
+        changeDifficulty(GameState.getInstance().getOptions().getDifficulty());
+        changeSnakeSkin(GameState.getInstance().getOptions().getSnakeSkin());
+        changeMapSkin(GameState.getInstance().getOptions().getMapSkin());
+    }
 
     @FXML //button for toggling sound & changes buttons icon on click.
     protected void volumeButtonClick() {
@@ -54,63 +64,68 @@ public class SettingsMenuController {
         stage.setScene(App.mainMenu);
     }
 
+    private void selectButtonNr(int index, Button... buttons) {
+        for(Button button : buttons) {
+            button.setStyle(null);
+        }
+        buttons[index-1].setStyle(SELECTED_STYLE);
+    }
+
+    private void changeDifficulty(Difficulty difficulty) {
+        GameState.getInstance().getOptions().setDifficulty(difficulty);
+        selectButtonNr(difficulty.getOrdinalRepresentation(), easyButton, mediumButton, hardButton);
+    }
+
+    private void changeSnakeSkin(SnakeSkin snakeSkin) {
+        GameState.getInstance().getOptions().setSnakeSkin(snakeSkin);
+        selectButtonNr(snakeSkin.getOrdinalRepresentation(), snake1Button, snake2Button, snake3Button);
+    }
+
+    private void changeMapSkin(MapSkin mapSkin) {
+        GameState.getInstance().getOptions().setMapSkin(mapSkin);
+        selectButtonNr(mapSkin.getOrdinalRepresentation(), map1Button, map2Button, map3Button);
+    }
 
     @FXML //changes color of buttons to indicate what options have been chosen.
     protected void easyButtonClick(){
-        easyButton.setStyle(SELECTED_STYLE);
-        mediumButton.setStyle(null);
-        hardButton.setStyle(null);
+        changeDifficulty(Difficulty.EASY);
     }
     @FXML
     protected void mediumButtonClick(){
-        easyButton.setStyle(null);
-        mediumButton.setStyle(SELECTED_STYLE);
-        hardButton.setStyle(null);
+        changeDifficulty(Difficulty.MEDIUM);
     }
     @FXML
     protected void hardButtonClick(){
-        easyButton.setStyle(null);
-        mediumButton.setStyle(null);
-        hardButton.setStyle(SELECTED_STYLE);
+        changeDifficulty(Difficulty.HARD);
     }
-    @FXML
-    protected void map1ButtonClick(){
-        map1Button.setStyle(SELECTED_STYLE);
-        map2Button.setStyle(null);
-        map3Button.setStyle(null);
-    }
-    @FXML
-    protected void map2ButtonClick(){
-        map1Button.setStyle(null);
-        map2Button.setStyle(SELECTED_STYLE);
-        map3Button.setStyle(null);
-    }
-    @FXML
-    protected void map3ButtonClick(){
-        map1Button.setStyle(null);
-        map2Button.setStyle(null);
-        map3Button.setStyle(SELECTED_STYLE);
-    }
+
+
     @FXML
     protected void snake1ButtonClick(){
-        snake1Button.setStyle(SELECTED_STYLE);
-        snake2Button.setStyle(null);
-        snake3Button.setStyle(null);
+        changeSnakeSkin(SnakeSkin.ONE);
     }
     @FXML
     protected void snake2ButtonClick(){
-        snake1Button.setStyle(null);
-        snake2Button.setStyle(SELECTED_STYLE);
-        snake3Button.setStyle(null);
+        changeSnakeSkin(SnakeSkin.TWO);
     }
     @FXML
     protected void snake3ButtonClick(){
-        snake1Button.setStyle(null);
-        snake2Button.setStyle(null);
-        snake3Button.setStyle(SELECTED_STYLE);
+        changeSnakeSkin(SnakeSkin.THREE);
     }
 
+    @FXML
+    protected void map1ButtonClick(){
+        changeMapSkin(MapSkin.ONE);
+    }
+    @FXML
+    protected void map2ButtonClick(){
+        changeMapSkin(MapSkin.TWO);
 
+    }
+    @FXML
+    protected void map3ButtonClick(){
+        changeMapSkin(MapSkin.THREE);
+    }
 
 
 }
