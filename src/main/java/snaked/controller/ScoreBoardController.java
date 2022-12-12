@@ -1,10 +1,11 @@
-package snaked.sceneController;
+package snaked.controller;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import snaked.App;
+import snaked.model.GameState;
 
 public class ScoreBoardController {
 
@@ -18,6 +19,6 @@ public class ScoreBoardController {
 
     @FXML //To display top 5 highest scores
     private void showHighScores(){
-
+        GameState.getInstance().getNHighestScores(5);
     }
 }

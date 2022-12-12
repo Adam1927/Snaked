@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.sceneController.ScoreBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFBC1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.controller.ScoreBoardController">
    <children>
       <Text layoutX="204.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="Scoreboard" wrappingWidth="192.3830966949463">
          <font>
@@ -34,7 +34,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button layoutX="26.0" layoutY="20.0" minWidth="34.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="23.0" prefWidth="34.0" style="-fx-background-color: #9E9E9E;">
+      <Button layoutX="26.0" layoutY="20.0" minWidth="34.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="23.0" prefWidth="34.0" style="-fx-background-color: #FFFBC1;">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                <image>

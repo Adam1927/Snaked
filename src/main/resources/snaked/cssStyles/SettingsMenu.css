@@ -4,14 +4,14 @@
     -fx-text-fill: transparent;
 }
 #settingsWindow{
-    -fx-background-color: #9E9E9E;
+    -fx-background-color: #FEBE8C;
 }
 
 .button{
     -fx-background-radius: 20px;
     -fx-background-color: transparent;
     -fx-font-family: Sacramento;
-    -fx-text-fill: white;
+    -fx-text-fill: #111;
     -fx-text-alignment: center;
     -fx-pref-height: 20px;
     -fx-pref-width: 68px;
@@ -20,7 +20,8 @@
     -fx-border-radius: 15px;
 }
 .button:hover{
-    -fx-background-color: #111111;
+    -fx-background-color: #111;
+    -fx-text-fill: #fff;
 }
 
 

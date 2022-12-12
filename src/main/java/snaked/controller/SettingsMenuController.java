@@ -1,4 +1,4 @@
-package snaked.sceneController;
+package snaked.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
