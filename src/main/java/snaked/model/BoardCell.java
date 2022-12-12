@@ -2,6 +2,6 @@ package snaked.model;
 
 public enum BoardCell {
     CONSUMABLE,
-    SNAKEPART,
-    WALL;
+    SNAKE_HEAD,
+    SNAKE_BODYPART;
 }

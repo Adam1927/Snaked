@@ -1,0 +1,32 @@
+Index: src/main/java/snaked/App.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package snaked;\n\nimport javafx.application.Application;\nimport javafx.fxml.FXML;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Button;\nimport javafx.scene.image.Image;\nimport javafx.scene.image.ImageView;\nimport javafx.stage.Stage;\nimport snaked.model.GameOptions;\n\nimport java.io.IOException;\n\npublic class App extends Application {\n\n    @FXML\n    Image snakeLogo = new Image(\"C:\\\\Users\\\\amirp\\\\group11\\\\group-11\\\\src\\\\main\\\\resources\\\\snaked\\\\Icons\\\\snakeLogo.png\");\n    ImageView snakeLogoView = new ImageView(snakeLogo);\n    Button startButton = new Button();\n    @Override\n    public void start(Stage stage) throws IOException {\n        System.out.println(\n                GameOptions.fromJSON(\"C:\\\\Users\\\\amirp\\\\group11\\\\group-11\\\\src\\\\main\\\\resources\\\\snaked\\\\config\\\\initialSettings.json\")\n        );\n        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(\"view/MainMenu.fxml\"));\n        Scene scene = new Scene(fxmlLoader.load());\n\n        stage.setTitle(\"Snake Game\");\n\n        Image icon = new Image(\"C:\\\\Users\\\\amirp\\\\group11\\\\group-11\\\\src\\\\main\\\\resources\\\\snaked\\\\Icons\\\\snake.png\"); // icon for the app\n        stage.getIcons().add(icon); // setting the icon\n\n\n        snakeLogo = new Image(\"C:\\\\Users\\\\amirp\\\\group11\\\\group-11\\\\src\\\\main\\\\resources\\\\snaked\\\\Icons\\\\snakeLogo.png\");\n        snakeLogoView = new ImageView(snakeLogo);\n\n        stage.setResizable(false);\n\n\n        stage.setScene(scene);\n        stage.show();\n    }\n\n    public static void main(String[] args) {\n        launch();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/snaked/App.java b/src/main/java/snaked/App.java
+--- a/src/main/java/snaked/App.java	(revision b49326ae7ccf7658f6984c134c1b3c48fa8bf799)
++++ b/src/main/java/snaked/App.java	(date 1669987755607)
+@@ -21,18 +21,18 @@
+     @Override
+     public void start(Stage stage) throws IOException {
+         System.out.println(
+-                GameOptions.fromJSON("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\config\\initialSettings.json")
++                GameOptions.fromJSON("resources/snaked/config/initialSettings.json")
+         );
+         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
+         Scene scene = new Scene(fxmlLoader.load());
+ 
+         stage.setTitle("Snake Game");
+ 
+-        Image icon = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\snake.png"); // icon for the app
++        Image icon = new Image("resources/snaked/Icons/snake.png"); // icon for the app
+         stage.getIcons().add(icon); // setting the icon
+ 
+ 
+-        snakeLogo = new Image("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\Icons\\snakeLogo.png");
++        snakeLogo = new Image("resources/snaked/Icons/snakeLogo.png");
+         snakeLogoView = new ImageView(snakeLogo);
+ 
+         stage.setResizable(false);

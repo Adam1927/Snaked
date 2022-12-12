@@ -10,7 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import snaked.model.GameOptions;
+import lombok.extern.java.Log;
+import snaked.model.GameState;
 
 import java.io.IOException;
 
@@ -29,17 +30,21 @@ public class App extends Application {
     Button scoreboardButton = new Button();
     @FXML
     Button settingsButton = new Button();
+
+    @FXML
+    Button startButton = new Button();
+
     public static Scene mainMenu;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        System.out.println(
-                GameOptions.fromJSON("src/main/resources/snaked/config/initialSettings.json")
-        );
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
+        GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
+        //load the data
+        GameState.getInstance().loadScores();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        stage.setTitle("Snake Game");
+        stage.setTitle("Snaked");
 
         Image icon = new Image("snaked/Icons/snake.png"); // icon for the app
         stage.getIcons().add(icon); // setting the icon
@@ -51,40 +56,41 @@ public class App extends Application {
         stage.setResizable(false);
 
         Button scoreboardButton = new Button();
-
+        scene.getStylesheets().add(getClass().getResource("cssStyles/MainMenu.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();
 
         mainMenu = scene;
     }
+
     //methods
     public void startGame(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameBoard.fxml"));
         scene = new Scene(fxmlLoader.load());
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();
     }
 
     // -- Scoreboard button functionality
-    public void goToScoreboard(ActionEvent event) throws IOException{
+    public void goToScoreboard(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/scoreboard.fxml"));
         scene = new Scene(fxmlLoader.load());
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
     // -- Settings button functionality
-    public void goToSettings(ActionEvent event) throws IOException{
+    public void goToSettings(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/SettingsMenu.fxml"));
         scene = new Scene(fxmlLoader.load());
         scene.getStylesheets().add(getClass().getResource("cssStyles/SettingsMenu.css").toExternalForm());
 
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 
@@ -92,5 +98,13 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        //before the app closes we save the scores
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                GameState.getInstance().saveScores();
+            } catch (IOException e) {
+                GameState.getInstance().getLogger().warning("Could not save scores");
+            }
+        }));
     }
 }

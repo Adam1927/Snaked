@@ -1,0 +1,14 @@
+Index: src/main/java/snaked/model/GameControls.java
+===================================================================
+diff --git a/src/main/java/snaked/model/GameControls.java b/src/main/java/snaked/model/GameControls.java
+--- a/src/main/java/snaked/model/GameControls.java	
++++ b/src/main/java/snaked/model/GameControls.java	
+@@ -25,7 +25,7 @@
+ 
+     public boolean nextTurn(){
+         gameBoard.updateSnakeCoordinates(currentDirection, false); // TODO: update ateConsumable
+-        
++
+         return checkAlive();
+     }
+     public int getScore (){
