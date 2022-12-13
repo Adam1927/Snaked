@@ -12,19 +12,15 @@ public class GameBoard {
     private final List<Coordinate> snakeCoords = new ArrayList<>();
     private Coordinate consumableCoords = null;
 
-
     @Setter private Direction currentDirection;
-    @Getter private final Path backgroundImage;
 
     /**
      * Create the GameBoard
-     * @param backgroundImage Background Image of the GameBoard
      * Spawn a consumable randomly on the board
      * Place the Snake on the GameBoard
      * Adjust the position of the snake's body depending on the starting position of the snake
      */
-    public GameBoard(Path backgroundImage) {
-        this.backgroundImage = backgroundImage;
+    public GameBoard() {
         spawnConsumable();
         GameOptions options = GameState.getInstance().getOptions();
         Direction startingDirection = options.getStartingDirection();

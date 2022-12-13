@@ -10,10 +10,10 @@ public enum MapSkin {
     THREE(3, null);
 
     @Getter private final int ordinalRepresentation;
-    @Getter private final Path mapFileName;
+    @Getter private final Path mapFilePath;
 
-    MapSkin(int ordinalRepresentation, Path mapFileNamee) {
+    MapSkin(int ordinalRepresentation, Path mapFilePath) {
         this.ordinalRepresentation = ordinalRepresentation;
-        this.mapFileName = mapFileNamee;
+        this.mapFilePath = mapFilePath;
     }
 }
