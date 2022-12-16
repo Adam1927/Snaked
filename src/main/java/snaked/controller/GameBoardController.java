@@ -5,10 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import snaked.App;
 import snaked.model.GameOptions;
 import snaked.model.GameState;
+import javafx.scene.Parent;
 
 import java.io.IOException;
 
@@ -23,7 +28,6 @@ public class GameBoardController {
     Text currentScore = new Text();
     @FXML
     Text highestScore = new Text();
-
     // -- constructor.
     public GameBoardController(){
 
@@ -59,5 +63,16 @@ public class GameBoardController {
         score *= currentMultiplier; // we can only eat one consumable at each time.
 
         this.currentScore.setText(String.valueOf(score));
+    }
+
+    //This is just a button to view the game over screen without running the game
+    @FXML
+    protected void testGameOverClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
+        scene = new Scene(fxmlLoader.load());
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }

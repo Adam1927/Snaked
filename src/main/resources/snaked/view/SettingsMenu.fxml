@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="settingsWindow" fx:id="settingsWindow" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.controller.SettingsMenuController">
+<AnchorPane id="settingsWindow" fx:id="settingsWindow" prefHeight="400.0" prefWidth="600.0" stylesheets="@../cssStyles/SettingsMenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.controller.SettingsMenuController">
    <children>
       <VBox alignment="CENTER" layoutX="147.0" layoutY="55.0" prefHeight="335.0" prefWidth="309.0" spacing="20.0">
          <children>
