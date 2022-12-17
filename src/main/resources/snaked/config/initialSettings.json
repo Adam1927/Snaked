@@ -6,6 +6,7 @@
   "gameBoardWidth": 41,
   "startingDirection": "RIGHT",
   "snakeSkin": "ONE",
+  "mapSkin": "ONE",
   "soundEffectsOn": "true",
   "difficulty": "EASY"
 }

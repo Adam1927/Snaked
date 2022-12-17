@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="settingsWindow" fx:id="settingsWindow" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.sceneController.SettingsMenuController">
+<AnchorPane id="settingsWindow" fx:id="settingsWindow" prefHeight="400.0" prefWidth="600.0" stylesheets="@../cssStyles/SettingsMenu.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.controller.SettingsMenuController">
    <children>
       <VBox alignment="CENTER" layoutX="147.0" layoutY="55.0" prefHeight="335.0" prefWidth="309.0" spacing="20.0">
          <children>
@@ -25,25 +25,25 @@
             <Label prefHeight="17.0" prefWidth="205.0" text="Choose difficulty level" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Easy" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Medium" />
-                  <Button mnemonicParsing="false" text="Hard" />
+                  <Button fx:id="easyButton" mnemonicParsing="false" onAction="#easyButtonClick" prefHeight="26.0" prefWidth="62.0" text="Easy" />
+                  <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#mediumButtonClick" prefHeight="26.0" prefWidth="62.0" text="Medium" />
+                  <Button fx:id="hardButton" mnemonicParsing="false" onAction="#hardButtonClick" text="Hard" />
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="96.0" text="Choose a map" textAlignment="CENTER" />
+            <Label prefHeight="17.0" prefWidth="96.0" text="Choose a mapSkin" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" text="Map 1" />
-                  <Button mnemonicParsing="false" text="Map 2" />
-                  <Button mnemonicParsing="false" text="Map 3" />
+                  <Button fx:id="map1Button" mnemonicParsing="false" onAction="#map1ButtonClick" text="Map 1" />
+                  <Button fx:id="map2Button" mnemonicParsing="false" onAction="#map2ButtonClick" text="Map 2" />
+                  <Button fx:id="map3Button" mnemonicParsing="false" onAction="#map3ButtonClick" text="Map 3" />
                </children>
             </HBox>
             <Label prefHeight="17.0" prefWidth="111.0" text="Choose a snake" textAlignment="CENTER" />
             <HBox alignment="CENTER" prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
-                  <Button mnemonicParsing="false" text="Snake 1" />
-                  <Button mnemonicParsing="false" text="Snake 2" />
-                  <Button mnemonicParsing="false" text="Snake 3" />
+                  <Button fx:id="snake1Button" mnemonicParsing="false" onAction="#snake1ButtonClick" text="Snake 1" />
+                  <Button fx:id="snake2Button" mnemonicParsing="false" onAction="#snake2ButtonClick" text="Snake 2" />
+                  <Button fx:id="snake3Button" mnemonicParsing="false" onAction="#snake3ButtonClick" text="Snake 3" />
                </children>
             </HBox>
          </children>

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import lombok.extern.java.Log;
 import snaked.model.GameState;
 
 import java.io.IOException;
@@ -35,6 +34,8 @@ public class App extends Application {
     Button startButton = new Button();
 
     public static Scene mainMenu;
+    public static Scene gameScreen;
+    public static Scene settingsMenu;
 
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
@@ -72,6 +73,8 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        gameScreen = scene;
     }
 
     // -- Scoreboard button functionality
@@ -88,12 +91,12 @@ public class App extends Application {
     public void goToSettings(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/SettingsMenu.fxml"));
         scene = new Scene(fxmlLoader.load());
-        scene.getStylesheets().add(getClass().getResource("cssStyles/SettingsMenu.css").toExternalForm());
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 
+        settingsMenu = scene;
     }
 
     public static void main(String[] args) {

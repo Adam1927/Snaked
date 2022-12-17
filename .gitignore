@@ -1,8 +1,8 @@
 # From https://github.com/github/gitignore/blob/master/Gradle.gitignore
 .gradle
 /build/
-/.idea/sonarlint/
-/.idea/shelf/
+.idea/sonarlint/
+.idea/shelf/
 
 # Ignore Gradle GUI config
 gradle-app.setting

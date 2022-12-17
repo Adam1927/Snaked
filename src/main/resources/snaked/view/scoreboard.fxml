@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFBC1;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snaked.controller.ScoreBoardController">
    <children>
-      <Text layoutX="237.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scoreboard" wrappingWidth="126.78306007385254">
+      <Text layoutX="204.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="Scoreboard" wrappingWidth="192.3830966949463">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold Italic" size="36.0" />
          </font>
       </Text>
-      <Text layoutX="224.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1st : &lt;insert point&gt; pts">
+      <Text layoutX="202.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="1st : &lt;insert point&gt; pts">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font></Text>
-      <Text layoutX="221.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2nd : &lt;insert point&gt; pts">
+      <Text layoutX="198.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="2nd : &lt;insert point&gt; pts">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font></Text>
-      <Text layoutX="223.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3rd : &lt;insert point&gt; pts">
+      <Text layoutX="200.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="3rd : &lt;insert point&gt; pts">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font></Text>
-      <Text layoutX="223.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5th : &lt;insert point&gt; pts">
+      <Text layoutX="201.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="5th : &lt;insert point&gt; pts">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font></Text>
-      <Text layoutX="223.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4th : &lt;insert point&gt; pts">
+      <Text layoutX="200.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Sacramento;" text="4th : &lt;insert point&gt; pts">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font></Text>
-      <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="181.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" style="-fx-background-color: #9E9E9E;" />
+      <Button layoutX="26.0" layoutY="20.0" minWidth="34.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="23.0" prefWidth="34.0" style="-fx-background-color: #FFFBC1;">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/snaked/Icons/backArrow.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <ImageView fitHeight="68.0" fitWidth="77.0" layoutX="127.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/snaked/Icons/scoreboardButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="77.0" layoutX="405.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/snaked/Icons/scoreboardButton.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
