@@ -39,6 +39,8 @@ public class App extends Application {
     public static Scene gameScreen;
     public static Scene settingsMenu;
 
+    public static Scene gameOverScreen;
+
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));

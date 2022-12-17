@@ -33,9 +33,10 @@ public class GameBoardController {
     @FXML Scene scene;
 
     @FXML
-    Text currentScore = new Text();
-    @FXML
     Text highestScore = new Text();
+
+    @FXML
+    Text eatenConsumables = new Text();
 
     @FXML GridPane grid = new GridPane();
 
@@ -43,8 +44,6 @@ public class GameBoardController {
     public GameBoardController() {
 
     }
-
-    // TODO: update current direction, keyboardevent
 
     @FXML
     public void initialize() throws URISyntaxException, InterruptedException {
@@ -62,18 +61,36 @@ public class GameBoardController {
 
         Timeline tl = new Timeline();
         tl.setCycleCount(Animation.INDEFINITE);
-        Image snakeHead = new Image("snaked/Images/Snake_Head.png", 10, 10, true, false);
-        Image snakeBody = new Image("snaked/Images/Snake_Body.png", 10, 10, true, false);
-        Image apple = new Image("snaked/Images/Apple.png", 10, 10, true, false);
+        double cellHeight = grid.getPrefHeight()/numRows;
+        double cellWidth = grid.getPrefWidth()/numCols;
+        Image snakeHead = new Image("snaked/Images/Snake_Head.png", cellWidth, cellHeight, true, true);
+        Image snakeBody = new Image("snaked/Images/Snake_Body.png", cellWidth, cellHeight, true, true);
+        Image apple = new Image("snaked/Images/Apple.png", cellWidth, cellHeight, true, true);
 
-
-
-        KeyFrame keyframe = new KeyFrame(Duration.seconds(1 * 1/GameState.getInstance().getOptions().getDifficulty().getSpeedMultiplier()),
+        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.5 * 1/GameState.getInstance().getOptions().getDifficulty().getSpeedMultiplier()),
                 event -> {
                     if (!GameState.getInstance().getGameBoard().nextTurn()) {
                         tl.stop();
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
+                        try {
+                            scene = new Scene(fxmlLoader.load());
+                            stage = (Stage) (eatenConsumables.getScene().getWindow());
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
                         return;
                     }
+
+                    Integer highscoreValue = 0;
+                    if(GameState.getInstance().getNHighestScores(1).size() > 0) {
+                        highscoreValue = GameState.getInstance().getNHighestScores(1).get(0);
+                    }
+                    highestScore.setText(highscoreValue.toString());
+
+                    eatenConsumables.setText(Integer.toString(GameState.getInstance().getGameBoard().getScore()));
 
                     for (int i = 0; i < grid.getChildren().size(); i++) {
                         grid.getChildren().remove(i);
@@ -126,15 +143,15 @@ public class GameBoardController {
 
     }
 
-    // --Method for updating the current score.
-    public void setCurrentScore() { // this will be changed after different difficulties are made.
-        int currentMultiplier = GameState.getInstance().getOptions().getDifficulty().getScoreMultiplier();
-        int score = GameState.getInstance().getSnake().getCurrentLength();
-
-        score *= currentMultiplier; // we can only eat one consumable at each time.
-
-        this.currentScore.setText(String.valueOf(score));
-    }
+//    // --Method for updating the current score.
+//    public void setCurrentScore() { // this will be changed after different difficulties are made.
+//        int currentMultiplier = GameState.getInstance().getOptions().getDifficulty().getScoreMultiplier();
+//        int score = GameState.getInstance().getSnake().getCurrentLength();
+//
+//        score *= currentMultiplier; // we can only eat one consumable at each time.
+//
+//        this.currentScore.setText(String.valueOf(score));
+//    }
 
     //This is just a button to view the game over screen without running the game
     @FXML
