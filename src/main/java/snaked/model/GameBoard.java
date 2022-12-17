@@ -2,17 +2,19 @@ package snaked.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@ToString
 public class GameBoard {
     private final List<Coordinate> snakeCoords = new ArrayList<>();
     private Coordinate consumableCoords = null;
 
-    @Setter private Direction currentDirection;
+    @Setter private Direction currentDirection = GameState.getInstance().getOptions().getStartingDirection();
 
     /**
      * Create the GameBoard
@@ -72,6 +74,7 @@ public class GameBoard {
         int xRandom = random.nextInt(GameState.getInstance().getOptions().getGameBoardWidth() - 1);
         int yRandom = random.nextInt(GameState.getInstance().getOptions().getGameBoardHeight() - 1);
         consumableCoords = new Coordinate(xRandom, yRandom);
+        System.out.println(consumableCoords);
     }
 
     /**

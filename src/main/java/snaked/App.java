@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import snaked.model.Direction;
 import snaked.model.GameState;
 
 import java.io.IOException;
@@ -69,6 +71,23 @@ public class App extends Application {
     public void startGame(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameBoard.fxml"));
         scene = new Scene(fxmlLoader.load());
+        scene.setOnKeyPressed(keyEvent -> {
+            KeyCode k = keyEvent.getCode();
+            switch (k) {
+               case W -> {
+                   GameState.getInstance().getGameBoard().setCurrentDirection(Direction.UP);
+               }
+                case A -> {
+                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.LEFT);
+                }
+                case S -> {
+                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.DOWN);
+                }
+                case D -> {
+                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.RIGHT);
+                }
+            }
+        });
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);

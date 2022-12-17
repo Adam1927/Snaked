@@ -1,41 +1,112 @@
 package snaked.controller;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import snaked.App;
-import snaked.model.GameOptions;
+import snaked.model.BoardCell;
+import snaked.model.GameBoard;
 import snaked.model.GameState;
-import javafx.scene.Parent;
+import snaked.model.Snake;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GameBoardController {
 
 
-
-    Stage stage;
-    Scene scene;
+    @FXML Stage stage;
+    @FXML Scene scene;
 
     @FXML
     Text currentScore = new Text();
     @FXML
     Text highestScore = new Text();
-    // -- constructor.
-    public GameBoardController(){
 
+    @FXML GridPane grid = new GridPane();
+
+    // -- constructor.
+    public GameBoardController() {
+
+    }
+
+    // TODO: update current direction, keyboardevent
+
+    @FXML
+    public void initialize() throws URISyntaxException, InterruptedException {
+        GameState.getInstance().setGameBoard(new GameBoard());
+        GameState.getInstance().setSnake(new Snake());
+        int numCols = GameState.getInstance().getOptions().getGameBoardWidth();
+        int numRows = GameState.getInstance().getOptions().getGameBoardHeight();
+
+        for (int i = 0; i < numCols; i++) {
+            grid.getColumnConstraints().add(new ColumnConstraints(grid.getPrefWidth() / numCols));
+        }
+        for (int i = 0; i < numRows; i++) {
+            grid.getRowConstraints().add(new RowConstraints(grid.getPrefHeight() / numRows));
+        }
+
+        Timeline tl = new Timeline();
+        tl.setCycleCount(Animation.INDEFINITE);
+        Image snakeHead = new Image("snaked/Images/Snake_Head.png", 10, 10, true, false);
+        Image snakeBody = new Image("snaked/Images/Snake_Body.png", 10, 10, true, false);
+        Image apple = new Image("snaked/Images/Apple.png", 10, 10, true, false);
+
+
+
+        KeyFrame keyframe = new KeyFrame(Duration.seconds(1 * 1/GameState.getInstance().getOptions().getDifficulty().getSpeedMultiplier()),
+                event -> {
+                    if (!GameState.getInstance().getGameBoard().nextTurn()) {
+                        tl.stop();
+                        return;
+                    }
+
+                    for (int i = 0; i < grid.getChildren().size(); i++) {
+                        grid.getChildren().remove(i);
+                    }
+                    BoardCell[][] board = GameState.getInstance().getGameBoard().getBoardAsArray();
+                    for (int x = 0; x < board.length; x++) {
+                        for (int y = 0; y < board[0].length; y++) {
+                            BoardCell cell = board[x][y];
+                            if (cell != null) {
+                                switch (cell) {
+                                    case SNAKE_HEAD -> {
+                                        grid.add(new ImageView(snakeHead), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                    }
+                                    case SNAKE_BODYPART -> {
+                                        grid.add(new ImageView(snakeBody), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                    }
+                                    case CONSUMABLE -> {
+                                        grid.add(new ImageView(apple), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                });
+
+        tl.getKeyFrames().add(keyframe);
+        tl.play();
     }
 
     // --methods
     // -- for changing the highest score if current score goes higher than top score.
-    public void setNewHighestScore(int score){
+    public void setNewHighestScore(int score) {
 
         this.highestScore.setText(String.valueOf(score));
 
@@ -48,7 +119,7 @@ public class GameBoardController {
 
         this.scene = new Scene(fxmlLoader.load());
 
-        this.stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        this.stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();
@@ -56,7 +127,7 @@ public class GameBoardController {
     }
 
     // --Method for updating the current score.
-    public void setCurrentScore(){ // this will be changed after different difficulties are made.
+    public void setCurrentScore() { // this will be changed after different difficulties are made.
         int currentMultiplier = GameState.getInstance().getOptions().getDifficulty().getScoreMultiplier();
         int score = GameState.getInstance().getSnake().getCurrentLength();
 
