@@ -8,13 +8,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 @ToString
 public class GameBoard {
     private final List<Coordinate> snakeCoords = new ArrayList<>();
     private Coordinate consumableCoords = null;
 
-    @Setter private Direction currentDirection = GameState.getInstance().getOptions().getStartingDirection();
+    @Setter @Getter private Direction currentDirection = GameState.getInstance().getOptions().getStartingDirection();
 
     /**
      * Create the GameBoard
@@ -70,11 +71,11 @@ public class GameBoard {
      */
     private void spawnConsumable() {
         Random random = GameState.getInstance().getRandomGen();
+        int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
 
-        int xRandom = random.nextInt(GameState.getInstance().getOptions().getGameBoardWidth() - 1);
-        int yRandom = random.nextInt(GameState.getInstance().getOptions().getGameBoardHeight() - 1);
+        int xRandom = random.nextInt(gameBoardSize);
+        int yRandom = random.nextInt(gameBoardSize);
         consumableCoords = new Coordinate(xRandom, yRandom);
-        System.out.println(consumableCoords);
     }
 
     /**
@@ -105,8 +106,9 @@ public class GameBoard {
      * @return true if within boundaries, otherwise false
      */
     private boolean checkCoordInsideGameBoard(Coordinate coordinate){
-        if(coordinate.getX() >= GameState.getInstance().getOptions().getGameBoardWidth() ||
-                coordinate.getY() >= GameState.getInstance().getOptions().getGameBoardHeight() ||
+        int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
+        if(coordinate.getX() >= gameBoardSize ||
+                coordinate.getY() >= gameBoardSize ||
                 coordinate.getX() < 0 || coordinate.getY() < 0){
             return false;
         }
@@ -135,7 +137,6 @@ public class GameBoard {
      * @return score of the current game
      */
     public int getScore() {
-        Snake snake = GameState.getInstance().getSnake();
         Difficulty difficulty = GameState.getInstance().getOptions().getDifficulty();
         return GameState.getInstance().getSnake().getEatenConsumables() * difficulty.getScoreMultiplier();
     }
@@ -146,15 +147,20 @@ public class GameBoard {
      * @return the board
      */
     public BoardCell[][] getBoardAsArray() {
-        BoardCell[][] board = new BoardCell[GameState.getInstance().getOptions().getGameBoardWidth()][GameState.getInstance().getOptions().getGameBoardHeight()];
+        int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
+        BoardCell[][] board = new BoardCell[gameBoardSize][gameBoardSize];
+
+        Coordinate headCoords = snakeCoords.get(0);
+
         List<Coordinate> bodyCoords = new ArrayList<>(snakeCoords);
         bodyCoords.remove(0);
-        Coordinate headCoords = snakeCoords.get(0);
+
         for (Coordinate bodyCoord : bodyCoords) {
             board[bodyCoord.getX()][bodyCoord.getY()] = BoardCell.SNAKE_BODYPART;
         }
         board[headCoords.getX()][headCoords.getY()] = BoardCell.SNAKE_HEAD;
         board[consumableCoords.getX()][consumableCoords.getY()] = BoardCell.CONSUMABLE;
+
         return board;
     }
 

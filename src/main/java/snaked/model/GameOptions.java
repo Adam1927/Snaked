@@ -11,11 +11,11 @@ public class GameOptions {
     private int startingPosX;
     private int startingPosY;
     private int initialSnakeLength;
-    private int gameBoardHeight;
-    private int gameBoardWidth;
+    private int gameBoardSize;
     private Direction startingDirection;
     private SnakeSkin snakeSkin;
     private MapSkin mapSkin;
     private boolean soundEffectsOn;
     private Difficulty difficulty;
+    private ConsumableSkin consumableSkin;
 }

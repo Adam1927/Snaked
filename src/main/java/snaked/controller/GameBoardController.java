@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -18,16 +17,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import snaked.App;
-import snaked.model.BoardCell;
-import snaked.model.GameBoard;
-import snaked.model.GameState;
-import snaked.model.Snake;
+import snaked.model.*;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class GameBoardController {
-
 
     @FXML Stage stage;
     @FXML Scene scene;
@@ -46,55 +40,38 @@ public class GameBoardController {
     }
 
     @FXML
-    public void initialize() throws URISyntaxException, InterruptedException {
+    public void initialize() {
         GameState.getInstance().setGameBoard(new GameBoard());
         GameState.getInstance().setSnake(new Snake());
-        int numCols = GameState.getInstance().getOptions().getGameBoardWidth();
-        int numRows = GameState.getInstance().getOptions().getGameBoardHeight();
+        Integer highscoreValue = GameState.getInstance().getNHighestScores(1).stream().findFirst().orElse(0);
+        highestScore.setText(highscoreValue.toString());
+        SnakeSkin snakeSkin = GameState.getInstance().getOptions().getSnakeSkin();
+        ConsumableSkin consumableSkin = GameState.getInstance().getOptions().getConsumableSkin();
 
-        for (int i = 0; i < numCols; i++) {
-            grid.getColumnConstraints().add(new ColumnConstraints(grid.getPrefWidth() / numCols));
+        int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
+        double cellSize = grid.getPrefHeight() / gameBoardSize;
+
+        for (int i = 0; i < gameBoardSize; i++) {
+            grid.getColumnConstraints().add(new ColumnConstraints(cellSize));
+            grid.getRowConstraints().add(new RowConstraints(cellSize));
         }
-        for (int i = 0; i < numRows; i++) {
-            grid.getRowConstraints().add(new RowConstraints(grid.getPrefHeight() / numRows));
-        }
 
-        Timeline tl = new Timeline();
-        tl.setCycleCount(Animation.INDEFINITE);
-        double cellHeight = grid.getPrefHeight()/numRows;
-        double cellWidth = grid.getPrefWidth()/numCols;
-        Image snakeHead = new Image("snaked/Images/Snake_Head.png", cellWidth, cellHeight, true, true);
-        Image snakeBody = new Image("snaked/Images/Snake_Body.png", cellWidth, cellHeight, true, true);
-        Image apple = new Image("snaked/Images/Apple.png", cellWidth, cellHeight, true, true);
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Animation.INDEFINITE);
 
-        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.5 * 1/GameState.getInstance().getOptions().getDifficulty().getSpeedMultiplier()),
+        KeyFrame keyframe = new KeyFrame(Duration.seconds(0.3 * 1 / GameState.getInstance().getOptions().getDifficulty().getSpeedMultiplier()),
                 event -> {
                     if (!GameState.getInstance().getGameBoard().nextTurn()) {
-                        tl.stop();
-                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
-                        try {
-                            scene = new Scene(fxmlLoader.load());
-                            stage = (Stage) (eatenConsumables.getScene().getWindow());
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-
+                        timeline.stop();
+                        navigateToGameOver();
                         return;
                     }
 
-                    Integer highscoreValue = 0;
-                    if(GameState.getInstance().getNHighestScores(1).size() > 0) {
-                        highscoreValue = GameState.getInstance().getNHighestScores(1).get(0);
-                    }
-                    highestScore.setText(highscoreValue.toString());
-
                     eatenConsumables.setText(Integer.toString(GameState.getInstance().getGameBoard().getScore()));
 
-                    for (int i = 0; i < grid.getChildren().size(); i++) {
-                        grid.getChildren().remove(i);
-                    }
+                    // clear gameboard
+                    grid.getChildren().clear();
+
                     BoardCell[][] board = GameState.getInstance().getGameBoard().getBoardAsArray();
                     for (int x = 0; x < board.length; x++) {
                         for (int y = 0; y < board[0].length; y++) {
@@ -102,13 +79,16 @@ public class GameBoardController {
                             if (cell != null) {
                                 switch (cell) {
                                     case SNAKE_HEAD -> {
-                                        grid.add(new ImageView(snakeHead), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                        ImageView imageView = getImageViewFromImage(snakeSkin.getHeadImage(), cellSize, GameState.getInstance().getGameBoard().getCurrentDirection());
+                                        grid.add(imageView, x, gameBoardSize - y);
                                     }
                                     case SNAKE_BODYPART -> {
-                                        grid.add(new ImageView(snakeBody), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                        ImageView imageView = getImageViewFromImage(snakeSkin.getBodyImage(), cellSize);
+                                        grid.add(imageView, x, gameBoardSize - y);
                                     }
                                     case CONSUMABLE -> {
-                                        grid.add(new ImageView(apple), x, GameState.getInstance().getOptions().getGameBoardHeight()-y);
+                                        ImageView imageView = getImageViewFromImage(consumableSkin.getImage(), cellSize);
+                                        grid.add(imageView, x, gameBoardSize - y);
                                     }
                                 }
                             }
@@ -117,16 +97,45 @@ public class GameBoardController {
                     }
                 });
 
-        tl.getKeyFrames().add(keyframe);
-        tl.play();
+        timeline.getKeyFrames().add(keyframe);
+        timeline.play();
     }
 
-    // --methods
-    // -- for changing the highest score if current score goes higher than top score.
-    public void setNewHighestScore(int score) {
+    private ImageView getImageViewFromImage(Image image, double size) {
+        return getImageViewFromImage(image, size, null);
+    }
 
-        this.highestScore.setText(String.valueOf(score));
+    private ImageView getImageViewFromImage(Image image, double size, Direction currentDirection) {
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(size);
+        imageView.setFitWidth(size);
+        if(currentDirection != null)
+            rotateImageView(imageView, GameState.getInstance().getGameBoard().getCurrentDirection());
+        return imageView;
+    }
 
+    private void rotateImageView(ImageView imageView, Direction currentDirection) {
+        if (currentDirection == null)
+            throw new IllegalArgumentException("currentDirection must not be null");
+
+        switch (currentDirection) {
+            case LEFT -> imageView.setRotate(0);
+            case UP -> imageView.setRotate(90);
+            case RIGHT -> imageView.setRotate(180);
+            case DOWN -> imageView.setRotate(270);
+        }
+    }
+
+    private void navigateToGameOver() {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
+        try {
+            scene = new Scene(fxmlLoader.load());
+            stage = (Stage) (eatenConsumables.getScene().getWindow());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            GameState.getInstance().getLogger().severe("Couldn't navigate to Game Over Screen");
+        }
     }
 
     // -- Method for going back to main menu.
@@ -142,16 +151,6 @@ public class GameBoardController {
         stage.show();
 
     }
-
-//    // --Method for updating the current score.
-//    public void setCurrentScore() { // this will be changed after different difficulties are made.
-//        int currentMultiplier = GameState.getInstance().getOptions().getDifficulty().getScoreMultiplier();
-//        int score = GameState.getInstance().getSnake().getCurrentLength();
-//
-//        score *= currentMultiplier; // we can only eat one consumable at each time.
-//
-//        this.currentScore.setText(String.valueOf(score));
-//    }
 
     //This is just a button to view the game over screen without running the game
     @FXML
