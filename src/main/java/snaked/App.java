@@ -1,7 +1,9 @@
 package snaked;
 
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,8 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import snaked.model.Direction;
+import snaked.model.GameBoard;
 import snaked.model.GameState;
 
 import java.io.IOException;
@@ -73,29 +77,40 @@ public class App extends Application {
     public void startGame(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameBoard.fxml"));
         scene = new Scene(fxmlLoader.load());
-        scene.setOnKeyPressed(keyEvent -> {
-            KeyCode k = keyEvent.getCode();
-            switch (k) {
-               case W -> {
-                   GameState.getInstance().getGameBoard().setCurrentDirection(Direction.UP);
-               }
-                case A -> {
-                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.LEFT);
-                }
-                case S -> {
-                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.DOWN);
-                }
-                case D -> {
-                    GameState.getInstance().getGameBoard().setCurrentDirection(Direction.RIGHT);
-                }
-            }
-        });
+        scene.setOnKeyPressed(onKeyPressedEvent());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();
 
         gameScreen = scene;
+    }
+
+    private static EventHandler<KeyEvent> onKeyPressedEvent() {
+        return keyEvent -> {
+            KeyCode k = keyEvent.getCode();
+            GameBoard gameBoard = GameState.getInstance().getGameBoard();
+            System.out.println(k.getChar());
+
+            switch (k) {
+                case W, UP -> {
+                    if(gameBoard.getCurrentDirection() != Direction.DOWN)
+                        gameBoard.setCurrentDirection(Direction.UP);
+                }
+                case A, LEFT -> {
+                    if(gameBoard.getCurrentDirection() != Direction.RIGHT)
+                        gameBoard.setCurrentDirection(Direction.LEFT);
+                }
+                case S, DOWN -> {
+                    if(gameBoard.getCurrentDirection() != Direction.UP)
+                        gameBoard.setCurrentDirection(Direction.DOWN);
+                }
+                case D, RIGHT -> {
+                    if(gameBoard.getCurrentDirection() != Direction.LEFT)
+                        gameBoard.setCurrentDirection(Direction.RIGHT);
+                }
+            }
+        };
     }
 
     // -- Scoreboard button functionality
