@@ -7,11 +7,17 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import snaked.App;
 import snaked.model.Difficulty;
 import snaked.model.GameState;
 import snaked.model.MapSkin;
 import snaked.model.SnakeSkin;
+
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
 
 public class SettingsMenuController {
     public static final String SELECTED_STYLE = "-fx-background-color: #111111;-fx-text-fill: #fff;";
@@ -36,7 +42,6 @@ public class SettingsMenuController {
     @FXML
     Button snake3Button = new Button();
 
-
     Image muteVolume = new Image("snaked/Icons/muteVolume.png");
     Image fullVolume = new Image("snaked/Icons/fullVolume.png");
 
@@ -48,12 +53,14 @@ public class SettingsMenuController {
     }
 
     @FXML //button for toggling sound & changes buttons icon on click.
-    protected void volumeButtonClick() {
+    protected void volumeButtonClick() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if(volumeIcon.getImage() == fullVolume){
             volumeIcon.setImage(muteVolume);
+            App.soundEffect.stop();
         }
         else{
             volumeIcon.setImage((fullVolume));
+            App.soundEffect.start();
         }
     }
 
@@ -126,6 +133,9 @@ public class SettingsMenuController {
     protected void map3ButtonClick(){
         changeMapSkin(MapSkin.THREE);
     }
+
+    // sound effect methods
+
 
 
 }

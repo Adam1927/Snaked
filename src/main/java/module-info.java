@@ -6,12 +6,12 @@ module snaked.snaked {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires java.logging;
+    requires java.desktop;
 
     opens snaked to javafx.fxml;
     exports snaked;
     exports snaked.controller;
     exports snaked.model;
-//    exports snaked.controller;
 
     opens snaked.controller to javafx.fxml;
 }
