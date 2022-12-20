@@ -18,6 +18,7 @@ import snaked.model.Direction;
 import snaked.model.GameBoard;
 import snaked.model.GameState;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
@@ -67,7 +68,7 @@ public class App extends Application{
 
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException, UnsupportedAudioFileException, LineUnavailableException {
-        GameState.createInstance(App.class.getResourceAsStream("config/initialSettings.json"));
+        GameState.createInstance();
         //load the data
         GameState.getInstance().loadScores();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/MainMenu.fxml"));
@@ -85,13 +86,13 @@ public class App extends Application{
         Button scoreboardButton = new Button();
         scene.getStylesheets().add(getClass().getResource("cssStyles/MainMenu.css").toExternalForm());
 
-        //Adding sound effect TODO
+        //Adding sound effect TODO:
 
-        soundFile = new File("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\sounds\\soundtrack.wav");
-        audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-        soundEffect = AudioSystem.getClip();
-        soundEffect.open(audioInputStream);
-        soundEffect.start();
+//        soundFile = new File("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\sounds\\soundtrack.wav");
+//        audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+//        soundEffect = AudioSystem.getClip();
+//        soundEffect.open(audioInputStream);
+//        soundEffect.start();
 
         stage.setScene(scene);
         stage.show();
@@ -100,7 +101,7 @@ public class App extends Application{
     }
 
     //methods
-    public void startGame(ActionEvent event) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
+    public void startGame(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameBoard.fxml"));
         scene = new Scene(fxmlLoader.load());
         scene.setOnKeyPressed(onKeyPressedEvent());
@@ -167,7 +168,7 @@ public class App extends Application{
         //before the app closes we save the scores
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
-                GameState.getInstance().saveScores();
+                GameState.getInstance().save();
             } catch (IOException e) {
                 GameState.getInstance().getLogger().warning("Could not save scores");
             }

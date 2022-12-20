@@ -18,6 +18,8 @@ import java.util.logging.Logger;
  */
 public class GameState {
     public static final String SCORE_FILENAME = System.getProperty("user.home") + "/snaked-scores.txt";
+    public static final String SETTINGS_FILENAME = System.getProperty("user.home") + "/snaked-settings.json";
+    public static final String INITIAL_SETTINGS_FILENAME = "config/initialSettings.json";
     @Getter private static GameState instance;
 
     @Getter private final GameOptions options;
@@ -40,13 +42,19 @@ public class GameState {
     /**
      * Creates an instance of GameState.
      *
-     * @param inputStream the inputStream (json format) to parse into the GameOptions
      * @return the GameState instance
      * @throws IOException           if the inputStream cannot be read
      * @throws IllegalStateException if an instance was already created previously
      */
-    public static GameState createInstance(InputStream inputStream) throws IOException {
+    public static GameState createInstance() throws IOException {
         if (instance != null) throw new IllegalStateException("Instance already exists");
+
+        InputStream inputStream;
+
+        if((new File(SETTINGS_FILENAME)).exists())
+            inputStream = new FileInputStream(SETTINGS_FILENAME);
+        else
+            inputStream = App.class.getResourceAsStream(INITIAL_SETTINGS_FILENAME);
 
         GameOptions gameOptions = (new ObjectMapper()).readValue(inputStream, GameOptions.class);
         instance = new GameState(gameOptions);
@@ -66,14 +74,16 @@ public class GameState {
     }
 
     /**
-     * Serializes the scores and saves them into a file
+     * Serializes the scores and settings and saves them into a file
      *
      * @throws IOException When the file cannot be written to
      */
-    public void saveScores() throws IOException {
+    public void save() throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SCORE_FILENAME))) {
             oos.writeObject(scores);
         }
+       (new ObjectMapper()).writer().writeValue(new FileOutputStream(SETTINGS_FILENAME), getInstance().getOptions());
+
     }
 
     /**

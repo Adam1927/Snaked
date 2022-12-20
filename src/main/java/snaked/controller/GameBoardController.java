@@ -63,6 +63,11 @@ public class GameBoardController {
                 event -> {
                     if (!GameState.getInstance().getGameBoard().nextTurn()) {
                         timeline.stop();
+
+                        int score = GameState.getInstance().getGameBoard().getScore();
+                        if (score > 0)
+                            GameState.getInstance().addScore(score);
+
                         navigateToGameOver();
                         return;
                     }
@@ -109,7 +114,7 @@ public class GameBoardController {
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(size);
         imageView.setFitWidth(size);
-        if(currentDirection != null)
+        if (currentDirection != null)
             rotateImageView(imageView, GameState.getInstance().getGameBoard().getCurrentDirection());
         return imageView;
     }
