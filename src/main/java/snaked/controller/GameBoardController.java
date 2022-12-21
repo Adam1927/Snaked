@@ -135,6 +135,11 @@ public class GameBoardController {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
         try {
             scene = new Scene(fxmlLoader.load());
+            //Sets the current score and highScore in game over screen
+            GameOverController controller = fxmlLoader.getController();
+            controller.setGameOverHighScore(GameState.getInstance().getNHighestScores(1).stream().findFirst().orElse(0).toString());
+            controller.setGameOverCurrentScore(eatenConsumables.getText());
+
             stage = (Stage) (eatenConsumables.getScene().getWindow());
             stage.setScene(scene);
             stage.show();
@@ -155,16 +160,5 @@ public class GameBoardController {
         stage.setScene(scene);
         stage.show();
 
-    }
-
-    //This is just a button to view the game over screen without running the game
-    @FXML
-    protected void testGameOverClick(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/GameOver.fxml"));
-        scene = new Scene(fxmlLoader.load());
-
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
     }
 }
