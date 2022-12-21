@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import lombok.Getter;
 
 public enum SnakeSkin {
-    //TODO: as soon as we have all the images for the snake skin, we can add them as arguments for the enums
     ONE(1, new Image("snaked/Images/1snake_head.png"), new Image("snaked/Images/1snake_body.png")),
     TWO(2, new Image("snaked/Images/2snake_head.png"), new Image("snaked/Images/2snake_body.png")),
     THREE(3, new Image("snaked/Images/3snake_head.png"), new Image("snaked/Images/3snake_body.png"));
