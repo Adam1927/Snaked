@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import snaked.controller.ScoreBoardController;
 import snaked.controller.SettingsMenuController;
 import snaked.model.Direction;
 import snaked.model.GameBoard;
@@ -144,6 +145,11 @@ public class App extends Application{
     public void goToScoreboard(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/scoreboard.fxml"));
         scene = new Scene(fxmlLoader.load());
+
+        //Displays the scores on the scoreboard screen
+        ScoreBoardController scoreController = fxmlLoader.getController();
+        scoreController.setHighScores(GameState.getInstance().formatHighScores(GameState.getInstance().getNHighestScores(5)));
+
         scene.getStylesheets().add(getClass().getResource("cssStyles/scoreboard.css").toExternalForm());
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

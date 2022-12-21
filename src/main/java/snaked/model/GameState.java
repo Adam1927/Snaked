@@ -114,5 +114,13 @@ public class GameState {
         return scores.stream().sorted((i1, i2) -> i2 - i1).limit(n).toList();
     }
 
-
+    /*
+    * Creates a string out of the scores list and formats it to the needs of the scoreboard
+    */
+    public String formatHighScores(List highScores){
+        String formattedScores = "";
+        for (int i = 0; i < highScores.size(); i++) {
+            formattedScores += highScores.get(i) + "\n" + "\n";
+        } return formattedScores;
+    }
 }
