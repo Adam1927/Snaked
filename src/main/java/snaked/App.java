@@ -14,13 +14,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import snaked.controller.ScoreBoardController;
-import snaked.controller.SettingsMenuController;
 import snaked.model.Direction;
 import snaked.model.GameBoard;
 import snaked.model.GameState;
 
-import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.sound.sampled.*;
 
@@ -47,23 +47,8 @@ public class App extends Application{
     public static Scene gameScreen;
     public static Scene settingsMenu;
 
-    public static File soundFile;
     public static AudioInputStream audioInputStream;
     public static Clip soundEffect;
-
-//    static {
-//        try {
-//            audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-//            soundFile = new File("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\sounds\\soundtrack.wav");
-//            soundEffect = AudioSystem.getClip();
-//        } catch (UnsupportedAudioFileException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } catch (LineUnavailableException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     public static Scene gameOverScreen;
 
@@ -87,13 +72,11 @@ public class App extends Application{
         Button scoreboardButton = new Button();
         scene.getStylesheets().add(getClass().getResource("cssStyles/MainMenu.css").toExternalForm());
 
-        //Adding sound effect TODO:
-
-//        soundFile = new File("C:\\Users\\amirp\\group11\\group-11\\src\\main\\resources\\snaked\\sounds\\soundtrack.wav");
-//        audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-//        soundEffect = AudioSystem.getClip();
-//        soundEffect.open(audioInputStream);
-//        soundEffect.start();
+        // Soundtrack
+        audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("soundtrack.wav"));
+        soundEffect = AudioSystem.getClip();
+        soundEffect.open(audioInputStream);
+        soundEffect.start();
 
         stage.setScene(scene);
         stage.show();

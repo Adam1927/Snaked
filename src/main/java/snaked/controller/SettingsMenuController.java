@@ -59,7 +59,7 @@ public class SettingsMenuController {
             App.soundEffect.stop();
         }
         else{
-            volumeIcon.setImage((fullVolume));
+            volumeIcon.setImage(fullVolume);
             App.soundEffect.start();
         }
     }
@@ -133,9 +133,5 @@ public class SettingsMenuController {
     protected void map3ButtonClick(){
         changeMapSkin(MapSkin.THREE);
     }
-
-    // sound effect methods
-
-
 
 }
