@@ -1,8 +1,8 @@
 {
-  "startingPosX": 10,
-  "startingPosY": 10,
+  "startingPosX": 15,
+  "startingPosY": 15,
   "initialSnakeLength": 3,
-  "gameBoardSize": 21,
+  "gameBoardSize": 31,
   "startingDirection": "RIGHT",
   "snakeSkin": "ONE",
   "mapSkin": "ONE",
