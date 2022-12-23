@@ -105,19 +105,19 @@ public class App extends Application{
 
             switch (k) {
                 case W, UP -> {
-                    if(gameBoard.getCurrentDirection() != Direction.DOWN)
+                    if(gameBoard.getLastDirection() != Direction.DOWN)
                         gameBoard.setCurrentDirection(Direction.UP);
                 }
                 case A, LEFT -> {
-                    if(gameBoard.getCurrentDirection() != Direction.RIGHT)
+                    if(gameBoard.getLastDirection() != Direction.RIGHT)
                         gameBoard.setCurrentDirection(Direction.LEFT);
                 }
                 case S, DOWN -> {
-                    if(gameBoard.getCurrentDirection() != Direction.UP)
+                    if(gameBoard.getLastDirection() != Direction.UP)
                         gameBoard.setCurrentDirection(Direction.DOWN);
                 }
                 case D, RIGHT -> {
-                    if(gameBoard.getCurrentDirection() != Direction.LEFT)
+                    if(gameBoard.getLastDirection() != Direction.LEFT)
                         gameBoard.setCurrentDirection(Direction.RIGHT);
                 }
             }

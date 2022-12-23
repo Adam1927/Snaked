@@ -10,9 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -47,6 +45,9 @@ public class GameBoardController {
         highestScore.setText(highscoreValue.toString());
         SnakeSkin snakeSkin = GameState.getInstance().getOptions().getSnakeSkin();
         ConsumableSkin consumableSkin = GameState.getInstance().getOptions().getConsumableSkin();
+        grid.setBackground(
+                MapSkin.getImageAsBackground(GameState.getInstance().getOptions().getMapSkin().getMapImage())
+        );
 
         int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
         double cellSize = grid.getPrefHeight() / gameBoardSize;
@@ -100,6 +101,9 @@ public class GameBoardController {
 
                         }
                     }
+                    GameState.getInstance().getGameBoard().setLastDirection(
+                            GameState.getInstance().getGameBoard().getCurrentDirection()
+                    );
                 });
 
         timeline.getKeyFrames().add(keyframe);

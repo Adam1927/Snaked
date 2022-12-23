@@ -1,6 +1,7 @@
 package snaked.model;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import lombok.Getter;
 
 import java.nio.file.Path;
@@ -16,5 +17,11 @@ public enum MapSkin {
     MapSkin(int ordinalRepresentation, Image mapImage) {
         this.ordinalRepresentation = ordinalRepresentation;
         this.mapImage = mapImage;
+    }
+
+    public static Background getImageAsBackground(Image image) {
+        return new Background(
+                new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)
+        );
     }
 }

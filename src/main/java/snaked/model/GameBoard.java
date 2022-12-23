@@ -16,6 +16,7 @@ public class GameBoard {
     private Coordinate consumableCoords = null;
 
     @Setter @Getter private Direction currentDirection = GameState.getInstance().getOptions().getStartingDirection();
+    @Setter @Getter private Direction lastDirection = GameState.getInstance().getOptions().getStartingDirection();
 
     /**
      * Create the GameBoard
@@ -26,7 +27,6 @@ public class GameBoard {
     public GameBoard() {
         spawnConsumable();
         GameOptions options = GameState.getInstance().getOptions();
-        Direction startingDirection = options.getStartingDirection();
         int initialSnakeLength = options.getInitialSnakeLength();
         snakeCoords.add(new Coordinate (options.getStartingPosX(), options.getStartingPosY()));
 
