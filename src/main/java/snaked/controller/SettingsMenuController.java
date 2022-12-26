@@ -50,18 +50,12 @@ public class SettingsMenuController {
         changeDifficulty(GameState.getInstance().getOptions().getDifficulty());
         changeSnakeSkin(GameState.getInstance().getOptions().getSnakeSkin());
         changeMapSkin(GameState.getInstance().getOptions().getMapSkin());
+        setSoundOn(GameState.getInstance().getOptions().isSoundEffectsOn());
     }
 
     @FXML //button for toggling sound & changes buttons icon on click.
-    protected void volumeButtonClick() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        if(volumeIcon.getImage() == fullVolume){
-            volumeIcon.setImage(muteVolume);
-            App.soundEffect.stop();
-        }
-        else{
-            volumeIcon.setImage(fullVolume);
-            App.soundEffect.start();
-        }
+    protected void volumeButtonClick() {
+        setSoundOn(!GameState.getInstance().getOptions().isSoundEffectsOn()); // toggle sound
     }
 
     @FXML //button that shows the original scene form the main menu
@@ -76,6 +70,18 @@ public class SettingsMenuController {
             button.setStyle(null);
         }
         buttons[index-1].setStyle(SELECTED_STYLE);
+    }
+
+    private void setSoundOn(boolean soundOn) {
+        GameState.getInstance().getOptions().setSoundEffectsOn(soundOn);
+        if(soundOn) {
+            volumeIcon.setImage(fullVolume);
+            App.soundEffect.start();
+        }
+        else{
+            volumeIcon.setImage(muteVolume);
+            App.soundEffect.stop();
+        }
     }
 
     private void changeDifficulty(Difficulty difficulty) {
