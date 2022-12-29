@@ -10,7 +10,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -86,15 +88,15 @@ public class GameBoardController {
                                 switch (cell) {
                                     case SNAKE_HEAD -> {
                                         ImageView imageView = getImageViewFromImage(snakeSkin.getHeadImage(), cellSize, GameState.getInstance().getGameBoard().getCurrentDirection());
-                                        grid.add(imageView, x, gameBoardSize - y);
+                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
                                     }
                                     case SNAKE_BODYPART -> {
                                         ImageView imageView = getImageViewFromImage(snakeSkin.getBodyImage(), cellSize);
-                                        grid.add(imageView, x, gameBoardSize - y);
+                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
                                     }
                                     case CONSUMABLE -> {
                                         ImageView imageView = getImageViewFromImage(consumableSkin.getImage(), cellSize);
-                                        grid.add(imageView, x, gameBoardSize - y);
+                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
                                     }
                                 }
                             }

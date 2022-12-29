@@ -27,7 +27,6 @@ public class GameBoard {
     public GameBoard() {
         spawnConsumable();
         GameOptions options = GameState.getInstance().getOptions();
-        int initialSnakeLength = options.getInitialSnakeLength();
         snakeCoords.add(new Coordinate (options.getStartingPosX(), options.getStartingPosY()));
 
         for(int i=1; i<options.getInitialSnakeLength(); i++){
@@ -89,7 +88,6 @@ public class GameBoard {
         // check if snake is outside the gameBoard
         if (!checkCoordInsideGameBoard(headCoords)) {
             return false;
-
         } else { // check if snake hits itself
             List<Coordinate> bodyCoords = new ArrayList<>(snakeCoords);
             bodyCoords.remove(0);
