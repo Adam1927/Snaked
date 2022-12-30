@@ -2,6 +2,9 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: transparent;
+    -fx-pref-width: 36;
+    -fx-pref-height: 36;
+    -fx-content-display: center;
 }
 #settingsWindow{
     -fx-background-color: #FEBE8C;
@@ -24,8 +27,6 @@
     -fx-text-fill: #fff;
 }
 
-
-
 .label{
     -fx-font-family: Sacramento;
     -fx-alignment: center;
@@ -40,4 +41,8 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: transparent;
+}
+#backButton:hover{
+    -fx-scale-x : 1.1;
+    -fx-scale-y: 1.1;
 }
