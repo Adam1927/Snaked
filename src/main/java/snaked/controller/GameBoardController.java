@@ -88,15 +88,15 @@ public class GameBoardController {
                                 switch (cell) {
                                     case SNAKE_HEAD -> {
                                         ImageView imageView = getImageViewFromImage(snakeSkin.getHeadImage(), cellSize, GameState.getInstance().getGameBoard().getCurrentDirection());
-                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
+                                        grid.add(imageView, x - 0, gameBoardSize - y - 1);
                                     }
                                     case SNAKE_BODYPART -> {
                                         ImageView imageView = getImageViewFromImage(snakeSkin.getBodyImage(), cellSize);
-                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
+                                        grid.add(imageView, x - 0, gameBoardSize - y - 1);
                                     }
                                     case CONSUMABLE -> {
                                         ImageView imageView = getImageViewFromImage(consumableSkin.getImage(), cellSize);
-                                        grid.add(imageView, x - 1, gameBoardSize - y - 1);
+                                        grid.add(imageView, x - 0, gameBoardSize - y - 1);
                                     }
                                 }
                             }
