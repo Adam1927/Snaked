@@ -77,6 +77,7 @@ public class SettingsMenuController {
         if(soundOn) {
             volumeIcon.setImage(fullVolume);
             App.soundEffect.start();
+            App.soundEffect.loop(-1);
         }
         else{
             volumeIcon.setImage(muteVolume);

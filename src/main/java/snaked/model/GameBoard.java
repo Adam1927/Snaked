@@ -71,7 +71,6 @@ public class GameBoard {
     private void spawnConsumable() {
         Random random = GameState.getInstance().getRandomGen();
         int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
-
         int xRandom = random.nextInt(gameBoardSize);
         int yRandom = random.nextInt(gameBoardSize);
         consumableCoords = new Coordinate(xRandom, yRandom);

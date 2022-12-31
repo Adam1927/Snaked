@@ -76,6 +76,7 @@ public class App extends Application{
         audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("soundtrack.wav"));
         soundEffect = AudioSystem.getClip();
         soundEffect.open(audioInputStream);
+        soundEffect.loop(-1);
         System.out.println(GameState.getInstance().getOptions().isSoundEffectsOn());
         if(GameState.getInstance().getOptions().isSoundEffectsOn())
             soundEffect.start();
