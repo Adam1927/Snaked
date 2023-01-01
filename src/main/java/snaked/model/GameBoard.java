@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.logging.Logger;
 
 @ToString
 public class GameBoard {
@@ -27,17 +25,17 @@ public class GameBoard {
     public GameBoard() {
         spawnConsumable();
         GameOptions options = GameState.getInstance().getOptions();
-        snakeCoords.add(new Coordinate (options.getStartingPosX(), options.getStartingPosY()));
+        snakeCoords.add(new Coordinate(options.getStartingPosX(), options.getStartingPosY()));
 
-        for(int i=1; i<options.getInitialSnakeLength(); i++){
+        for (int i = 1; i < options.getInitialSnakeLength(); i++) {
             switch (currentDirection) {
-                case UP -> snakeCoords.add(new Coordinate(options.getStartingPosX(), options.getStartingPosY()-i));
-                case RIGHT -> snakeCoords.add(new Coordinate(options.getStartingPosX()-i, options.getStartingPosY()));
-                case DOWN -> snakeCoords.add(new Coordinate(options.getStartingPosX(), options.getStartingPosY()+i));
-                case LEFT -> snakeCoords.add(new Coordinate(options.getStartingPosX()+i, options.getStartingPosY()));
+                case UP -> snakeCoords.add(new Coordinate(options.getStartingPosX(), options.getStartingPosY() - i));
+                case RIGHT -> snakeCoords.add(new Coordinate(options.getStartingPosX() - i, options.getStartingPosY()));
+                case DOWN -> snakeCoords.add(new Coordinate(options.getStartingPosX(), options.getStartingPosY() + i));
+                case LEFT -> snakeCoords.add(new Coordinate(options.getStartingPosX() + i, options.getStartingPosY()));
+            }
         }
-    }
-        if(!checkCoordInsideGameBoard(snakeCoords.get(0)) || !checkCoordInsideGameBoard(snakeCoords.get(snakeCoords.size()-1))){
+        if (!checkCoordInsideGameBoard(snakeCoords.get(0)) || !checkCoordInsideGameBoard(snakeCoords.get(snakeCoords.size() - 1))) {
             throw new IllegalStateException("The snake is outside the game board");
         }
     }
@@ -71,9 +69,20 @@ public class GameBoard {
     private void spawnConsumable() {
         Random random = GameState.getInstance().getRandomGen();
         int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
-        int xRandom = random.nextInt(gameBoardSize);
-        int yRandom = random.nextInt(gameBoardSize);
-        consumableCoords = new Coordinate(xRandom, yRandom);
+        boolean foundValidConsumableCoords = false;
+
+        // try to find a random location on the game board which is not on the snake
+        while (!foundValidConsumableCoords) {
+            int xRandom = random.nextInt(gameBoardSize);
+            int yRandom = random.nextInt(gameBoardSize);
+            Coordinate randomCoords = new Coordinate(xRandom, yRandom);
+
+            if (!snakeCoords.contains(randomCoords)) {
+                this.consumableCoords = randomCoords;
+                foundValidConsumableCoords = true;
+            }
+        }
+
     }
 
     /**
@@ -99,14 +108,15 @@ public class GameBoard {
 
     /**
      * Checks if the snake head coordinates or body coordinates is outside the game board
+     *
      * @param coordinate Coordinates to check
      * @return true if within boundaries, otherwise false
      */
-    private boolean checkCoordInsideGameBoard(Coordinate coordinate){
+    private boolean checkCoordInsideGameBoard(Coordinate coordinate) {
         int gameBoardSize = GameState.getInstance().getOptions().getGameBoardSize();
-        if(coordinate.getX() >= gameBoardSize ||
+        if (coordinate.getX() >= gameBoardSize ||
                 coordinate.getY() >= gameBoardSize ||
-                coordinate.getX() < 0 || coordinate.getY() < 0){
+                coordinate.getX() < 0 || coordinate.getY() < 0) {
             return false;
         }
         return true;
@@ -141,6 +151,7 @@ public class GameBoard {
     /**
      * Create a two-dimensional array of board cells
      * Add the coordinates of the head, body parts and consumable
+     *
      * @return the board
      */
     public BoardCell[][] getBoardAsArray() {
